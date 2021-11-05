@@ -1,0 +1,48 @@
+/*variables*/
+
+$font-stack: "Inter", "Jost", sans-serif;
+$font-main: "Inter", sans-serif;
+$font-secondary: "Jost", sans-serif;
+$color-white: #fff;
+$color-black: #000;
+$color-grey: #e3e3e3;
+$color-dark-grey: #767676;
+$color-wrong: rgba(219, 16, 16, 0.856);
+$color-input: #efefef;
+$color-placeholder: #c7c7c7;
+$color-active: #525252;
+$bg-btn-close: #5c5c5c;
+$bg-btn: #4dd599;
+$bg-tasks: #f4f6f8;
+/*Media quieries mixins*/
+
+@mixin xs-devices {
+  @media (max-width: 575px) {
+    @content;
+  }
+}
+@mixin sm-devices {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+@mixin md-devices {
+  @media (max-width: 991px) {
+    @content;
+  }
+}
+@mixin lg-devices {
+  @media (max-width: 1199px) {
+    @content;
+  }
+}
+@mixin xl-devices {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin landscape-orientation {
+  @media (max-width: 991px) and (orientation: landscape) {
+    @content;
+  }
+}

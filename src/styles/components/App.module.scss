@@ -1,0 +1,26 @@
+@import "../variables";
+
+.main {
+  position: relative;
+  text-align: center;
+  background: $color-black;
+  color: $color-black;
+  font-family: $font-main;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.todo_content {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  background: $color-white;
+  box-sizing: border-box;
+}
