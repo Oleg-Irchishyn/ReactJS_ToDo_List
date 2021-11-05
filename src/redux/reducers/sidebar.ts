@@ -9,12 +9,14 @@ const ADD_NEW_TODO_LIST_ITEM = 'todoApp/ADD_NEW_TODO_LIST_ITEM';
 const SET_SELECTED_TODO_LIST_COLOR = 'todoApp/SET_SELECTED_TODO_LIST_COLOR';
 const ISLOADED_SUCCESS = 'todoApp/ISLOADED_SUCCESS';
 const DELETE_TODO_LIST_ITEM = 'todoApp/DELETE_TODO_LIST_ITEM';
+const SET_AVTIVE_TODO_LIST = 'todoApp/SET_AVTIVE_TODO_LIST';
 
 let initialState = {
   sidebarTodoList: [] as Array<SideBarTodoListsType>,
   colors: [] as Array<ColorsType>,
   selectedTodoListColor: 1 as number | string,
   isLoaded: false as boolean,
+  activeTodoList: null as SideBarTodoListsType | null,
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
@@ -59,6 +61,12 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         sidebarTodoList: updatedTodoListItems,
       };
     }
+    case SET_AVTIVE_TODO_LIST: {
+      return {
+        ...state,
+        activeTodoList: action.payload,
+      };
+    }
     default:
       return state;
   }
@@ -79,6 +87,8 @@ export const actions = {
       type: DELETE_TODO_LIST_ITEM,
       id,
     } as const),
+  setActiveTodoList: (obj: SideBarTodoListsType) =>
+    ({ type: SET_AVTIVE_TODO_LIST, payload: obj } as const),
 };
 
 export const getAllSidebarTodoList = (): ThunkType => async (dispatch) => {

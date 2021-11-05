@@ -18,3 +18,7 @@ export const getTodoListColors = (state: AppStateType) => {
 export const getIsLoaded = (state: AppStateType) => {
   return state.sidebar.isLoaded;
 };
+
+export const getActiveTodoList = (state: AppStateType) => {
+  return state.sidebar.activeTodoList;
+};
