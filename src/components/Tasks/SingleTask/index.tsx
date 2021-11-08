@@ -2,14 +2,16 @@ import React from 'react';
 import { SideBarTodoListsType } from '../../../redux/types/types';
 import styles from '../../../styles/components/Tasks.module.scss';
 import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { AppStateType } from '../../../redux/store';
 import { actions, deleteSidebarTodoList } from '../../../redux/reducers/sidebar';
+import { getActiveTodoList } from '../../../redux/selectors/sidebarSelectors';
+import { RouteComponentProps } from 'react-router-dom';
 
 const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ elem, deleteSidebarTodoList, setActiveTodoList }) => {
+  ({ elem, deleteSidebarTodoList, setActiveTodoList, activeTodoList, history }) => {
     const { id, name, color } = elem;
     const colorStyle = {
       backgroundColor: color,
@@ -18,10 +20,16 @@ const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> 
     const handleDeleTodoList = (id: string | number) => {
       if (window.confirm(`Do you want to remove this list?`)) {
         deleteSidebarTodoList(id);
+        history.push(`/`);
+        localStorage.clear();
       } else return false;
     };
     return (
-      <div className={cn(styles.tasks__item_wrapper)} onClick={() => setActiveTodoList(elem)}>
+      <div
+        className={cn(styles.tasks__item_wrapper, {
+          [styles.active]: activeTodoList && activeTodoList.id === id,
+        })}
+        onClick={() => setActiveTodoList(elem)}>
         <NavLink className={cn(styles.tasks__item)} to={`/lists/${id}`} title={name} rel="nofollow">
           <i style={colorStyle}></i>
           <p>{name}</p>
@@ -32,7 +40,9 @@ const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> 
   },
 );
 
-const mapStateToProps = (state: AppStateType) => ({});
+const mapStateToProps = (state: AppStateType) => ({
+  activeTodoList: getActiveTodoList(state),
+});
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
@@ -42,6 +52,7 @@ type MapDispatchPropsType = {
 
 type ownProps = {
   elem: SideBarTodoListsType;
+  history: RouteComponentProps['history'];
 };
 
 export default compose<React.ComponentType>(
@@ -49,4 +60,5 @@ export default compose<React.ComponentType>(
     deleteSidebarTodoList,
     setActiveTodoList: actions.setActiveTodoList,
   }),
+  withRouter,
 )(SingleTask);

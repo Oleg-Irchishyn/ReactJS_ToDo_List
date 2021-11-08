@@ -17,7 +17,7 @@ let initialState = {
   selectedTodoListColor: 1 as number | string,
   isLoaded: false as boolean,
   activeTodoList: JSON.parse(
-    sessionStorage.getItem('activeTodoList') || '{}',
+    localStorage.getItem('activeTodoList') || '{}',
   ) as SideBarTodoListsType,
 };
 
@@ -119,7 +119,7 @@ export const deleteSidebarTodoList =
   (id: string | number): ThunkType =>
   async (dispatch) => {
     try {
-      let data = await todoAPI.removeTodoListItem(id);
+      await todoAPI.removeTodoListItem(id);
       dispatch(actions.deleteTodoListItem(id));
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);

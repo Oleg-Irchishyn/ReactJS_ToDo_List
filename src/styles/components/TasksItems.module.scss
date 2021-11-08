@@ -15,6 +15,7 @@
 .activetask {
     position: relative;
     &__title {
+        position: relative;
         font-family: $font-secondary;
         font-weight: 700;
         font-size: 32px;
@@ -24,5 +25,132 @@
         padding: 0 0 30px 0;
         margin: 0;
         border-bottom: 1px solid #f2f2f2;
+
+        i {
+            padding: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    }
+    &__tasks {
+        padding: 15px 0 15px 0;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+
+        .task_item {
+            position: relative;
+            padding: 15px 0 15px 0;
+            text-align: left;
+            padding-right: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            input[type="checkbox"] {
+                display: none;
+            }
+            input[type="checkbox"] + label {
+                position: relative;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 1;
+                line-height: normal;
+                color: $color-black;
+                padding: 0 0 0 35px;
+                cursor: pointer;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 20px;
+                    height: 20px;
+                    background: transparent;
+                    border: 2px solid #e8e8e8;
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                }
+            }
+            input[type="checkbox"]:checked + label {
+                line-height: 1;
+                &::before {
+                    content: "\2713";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    background: $bg-btn;
+                    border: 2px solid $bg-btn;
+                    border-radius: 50%;
+                    color: $color-white;
+                    font-size: 16px;
+                    line-height: 15px;
+                    padding-left: 1px;
+                }
+            }
+            .item_edit {
+                height: 21px;
+                width: 21px;
+                position: absolute;
+                right: calc(0% + 30px);
+                top: calc(0% - 5px);
+                padding: 5px;
+                z-index: 5;
+                transform: rotate(0deg) scale(1);
+                transition: 0.2s ease;
+                box-sizing: border-box;
+                cursor: pointer;
+                @media (min-width: 992px) {
+                    &:hover {
+                        transform: rotate(360deg) scale(1.1);
+                        transition: 0.2s ease;
+                    }
+                }
+                img {
+                    max-width: 100%;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .item_delete {
+                height: 14px;
+                width: 14px;
+                padding: 5px;
+                right: 0;
+                top: calc(0% + 4px);
+                position: absolute;
+                transform: rotate(0deg) scale(1);
+                transition: 0.2s ease;
+                cursor: pointer;
+                box-sizing: border-box;
+                @media (min-width: 992px) {
+                    &:hover {
+                        transform: rotate(180deg) scale(1.1);
+                        transition: 0.2s ease;
+                    }
+                }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%) rotate(45deg);
+                    background: $color-grey;
+                    width: 100%;
+                    height: 2px;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                    background: $color-grey;
+                    width: 100%;
+                    height: 2px;
+                }
+            }
+        }
     }
 }

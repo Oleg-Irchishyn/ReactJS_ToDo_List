@@ -28,7 +28,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
     }, []);
 
     React.useEffect(() => {
-      sessionStorage.setItem('activeTodoList', JSON.stringify(activeTodoList));
+      localStorage.setItem('activeTodoList', JSON.stringify(activeTodoList));
     });
 
     if (!initialized || !isLoaded) {
