@@ -1,4 +1,5 @@
 import { getAllSidebarTodoList, getAllTodoListColors } from './sidebar';
+import { getAllTodoListTasks } from './tasks';
 import { ThunkDispatch } from 'redux-thunk';
 import { AppStateType, InferActionsTypes } from '../store';
 const INITIALIZED_SUCCESS = 'SK/APP/INITIALIZED_SUCCESS';
@@ -25,7 +26,11 @@ export const actions = {
 };
 
 export const initializeApp = () => (dispatch: ThunkDispatchType) => {
-  let promises = [dispatch(getAllTodoListColors()), dispatch(getAllSidebarTodoList())];
+  let promises = [
+    dispatch(getAllTodoListColors()),
+    dispatch(getAllSidebarTodoList()),
+    dispatch(getAllTodoListTasks()),
+  ];
 
   Promise.all([promises]).then(() => {
     dispatch(actions.initializedSuccess());

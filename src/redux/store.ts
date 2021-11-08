@@ -1,12 +1,14 @@
 import { createStore, combineReducers, compose, applyMiddleware, Action } from 'redux';
 import app from './reducers/app';
 import sidebar from './reducers/sidebar';
+import tasks from './reducers/tasks';
 import thunkMiddleware, { ThunkAction } from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 
 let rootReducer = combineReducers({
   app,
   sidebar,
+  tasks,
   form: formReducer,
 });
 

@@ -1,6 +1,6 @@
 import { todoAPI } from './../../api/api';
 import { FormAction } from 'redux-form';
-import { AppStateType, BaseThunkType, InferActionsTypes } from '../store';
+import { BaseThunkType, InferActionsTypes } from '../store';
 import { ColorsType, SideBarTodoListsType } from '../types/types';
 
 const SET_SIDEBAR_TODO_LIST = 'todoApp/SET_SIDEBAR_TODO_LIST';
