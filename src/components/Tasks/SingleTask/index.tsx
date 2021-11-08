@@ -22,7 +22,7 @@ const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> 
     };
     return (
       <div className={cn(styles.tasks__item_wrapper)} onClick={() => setActiveTodoList(elem)}>
-        <NavLink className={cn(styles.tasks__item)} to="/" title={name} rel="nofollow">
+        <NavLink className={cn(styles.tasks__item)} to={`/lists/${id}`} title={name} rel="nofollow">
           <i style={colorStyle}></i>
           <p>{name}</p>
         </NavLink>

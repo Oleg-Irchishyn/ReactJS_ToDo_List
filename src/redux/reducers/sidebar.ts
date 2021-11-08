@@ -16,7 +16,9 @@ let initialState = {
   colors: [] as Array<ColorsType>,
   selectedTodoListColor: 1 as number | string,
   isLoaded: false as boolean,
-  activeTodoList: null as SideBarTodoListsType | null,
+  activeTodoList: JSON.parse(
+    sessionStorage.getItem('activeTodoList') || '{}',
+  ) as SideBarTodoListsType,
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {

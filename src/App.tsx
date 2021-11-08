@@ -8,7 +8,7 @@ import { initializeApp } from './redux/reducers/app';
 import { getInitialization } from './redux/selectors/appSelectors';
 import cn from 'classnames';
 import { Tasks, TasksItems } from './components';
-import { getIsLoaded } from './redux/selectors/sidebarSelectors';
+import { getActiveTodoList, getIsLoaded } from './redux/selectors/sidebarSelectors';
 
 /* React Lazy example
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -22,10 +22,14 @@ const SuspendedProfile = withSuspense(ProfileContainer);
 }
 
 const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
-  ({ initializeApp, initialized, isLoaded }) => {
+  ({ initializeApp, initialized, isLoaded, activeTodoList }) => {
     React.useEffect(() => {
       initializeApp();
     }, []);
+
+    React.useEffect(() => {
+      sessionStorage.setItem('activeTodoList', JSON.stringify(activeTodoList));
+    });
 
     if (!initialized || !isLoaded) {
       return <Preloader />;
@@ -47,6 +51,7 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
 const mapStateToProps = (state: AppStateType) => ({
   initialized: getInitialization(state),
   isLoaded: getIsLoaded(state),
+  activeTodoList: getActiveTodoList(state),
 });
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
