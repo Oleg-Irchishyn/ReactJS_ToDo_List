@@ -1,5 +1,12 @@
 @import "../variables";
 
+.form_wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
 .show_form_btn {
     font-weight: 500;
     font-size: 14px;
@@ -22,9 +29,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    max-width: 235px;
+    max-width: 100%;
     width: 100%;
-    min-height: 148px;
     background: $color-white;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
     border-radius: 10px;
@@ -34,6 +40,40 @@
     &__content {
         position: relative;
         width: 100%;
+
+        .content__buttons {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-start;
+
+            .button_close {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                font-family: $font-secondary;
+                font-weight: 600;
+                font-size: 14px;
+                color: $color-dark-grey;
+                word-break: break-word;
+                border-radius: 4px;
+                background: $bg-tasks;
+                min-height: 37px;
+                letter-spacing: 0.15px;
+                max-width: 90px;
+                width: 100%;
+                transition: 0.2s ease;
+                cursor: pointer;
+                @media (min-width: 992px) {
+                    &:hover {
+                        transform: translateX(10px);
+                        transition: 0.2s ease;
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
     }
 
     button {
@@ -47,14 +87,16 @@
         color: $color-white;
         line-height: normal;
         -webkit-appearance: none;
+        word-break: break-word;
         text-align: center;
         letter-spacing: 0.15px;
         background: $bg-btn;
         border: none;
         border-radius: 4px;
         width: 100%;
-        max-width: 100%;
+        max-width: 145px;
         min-height: 37px;
+        margin: 0 20px 0 0;
         outline: none;
         transform: none;
         opacity: 1;

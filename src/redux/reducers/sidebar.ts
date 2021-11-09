@@ -11,6 +11,7 @@ const ISLOADED_SUCCESS = 'todoApp/ISLOADED_SUCCESS';
 const DELETE_TODO_LIST_ITEM = 'todoApp/sidebar/DELETE_TODO_LIST_ITEM';
 const SET_AVTIVE_TODO_LIST = 'todoApp/sidebar/SET_AVTIVE_TODO_LIST';
 const ADD_NEW_ACTIVE_TODO_LIST_TASK = 'todoApp/sidebar/ADD_NEW_ACTIVE_TODO_LIST_TASK';
+const CHANGE_ACTIVE_TODO_LIST_TASK_NAME = 'todoApp/sidebar/CHANGE_ACTIVE_TODO_LIST_TASK_NAME ';
 
 let initialState = {
   sidebarTodoList: [] as Array<SideBarTodoListsType>,
@@ -83,6 +84,24 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
       }
       break;
     }
+    case CHANGE_ACTIVE_TODO_LIST_TASK_NAME: {
+      if (state.activeTodoList && state.activeTodoList.tasks) {
+        const newTaskName = [...state.activeTodoList.tasks].map((item) => {
+          if (item.id === action.id) {
+            item.text = action.text;
+          }
+          return item;
+        });
+        return {
+          ...state,
+          activeTodoList: {
+            ...state.activeTodoList,
+            tasks: newTaskName,
+          },
+        };
+      }
+      break;
+    }
     default:
       return state;
   }
@@ -111,6 +130,8 @@ export const actions = {
       type: ADD_NEW_ACTIVE_TODO_LIST_TASK,
       payload: task,
     } as const),
+  changeActiveTodoListTaskName: (id: string | number, text: string | number) =>
+    ({ type: CHANGE_ACTIVE_TODO_LIST_TASK_NAME, id, text } as const),
 };
 
 export const getAllSidebarTodoList = (): ThunkType => async (dispatch) => {

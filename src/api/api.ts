@@ -42,4 +42,9 @@ export const todoAPI = {
       return response.data;
     });
   },
+  renameTodoListTask: (id: string | number, newVal: string | number) => {
+    return instance
+      .patch<TasksType>(`tasks/` + id, { text: newVal })
+      .then((response) => response.data);
+  },
 };

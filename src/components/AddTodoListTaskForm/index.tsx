@@ -19,6 +19,10 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
       setFormVisibility(true);
     };
 
+    const onCancelSubmit = () => {
+      setFormVisibility(false);
+    };
+
     const dropdownFormRef = React.useRef<HTMLDivElement>(null);
 
     const handleTaskFormOutsideClick = React.useCallback((e: any) => {
@@ -51,16 +55,13 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
       setNewTodoListTaskSuccess(id, listId, text, completed);
     };
     return (
-      <div ref={dropdownFormRef}>
+      <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
         <div className={cn(styles.show_form_btn)} onClick={showAddTaskFormPopup}>
           {!visibleForm ? <b>+</b> : <b>-</b>} <span>Add New Task</span>
         </div>
         {visibleForm && (
           <div className={cn(styles.add_todo_list_task_form)}>
-            <div
-              className={cn(styles.add_todo_list_task_form__close)}
-              onClick={() => setFormVisibility(false)}></div>
-            <AddTodoListTaskFormFormRedux onSubmit={onSubmitForm} />
+            <AddTodoListTaskFormFormRedux onCancelSubmit={onCancelSubmit} onSubmit={onSubmitForm} />
           </div>
         )}
       </div>
@@ -69,10 +70,12 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
 
 const maxLength20 = maxLengthCreator(20);
 
-const AddNewTaskForm: React.FC<InjectedFormProps<AddTodoListTaskFormValuesType>> = (props) => {
-  const { handleSubmit } = props;
+const AddNewTaskForm: React.FC<
+  InjectedFormProps<AddTodoListTaskFormValuesType, ownFormProps> & ownFormProps
+> = (props) => {
+  const { handleSubmit, onCancelSubmit } = props;
   return (
-    <form className={cn(styles.add_todo_list_task_form_content)} onSubmit={handleSubmit}>
+    <form className={cn(styles.add_todo_list_task_form__content)} onSubmit={handleSubmit}>
       {createInput<AddTodoListTaskFormValuesTypeKeys>(
         uuidv4(),
         `Enter task's name`,
@@ -82,13 +85,19 @@ const AddNewTaskForm: React.FC<InjectedFormProps<AddTodoListTaskFormValuesType>>
       )}
       <div className={styles.content__buttons}>
         <button>Submit</button>
-        <div>Cancel</div>
+        <div className={styles.button_close} onClick={onCancelSubmit}>
+          Cancel
+        </div>
       </div>
     </form>
   );
 };
 
-const AddTodoListTaskFormFormRedux = reduxForm<AddTodoListTaskFormValuesType>({
+type ownFormProps = {
+  onCancelSubmit: () => void;
+};
+
+const AddTodoListTaskFormFormRedux = reduxForm<AddTodoListTaskFormValuesType, ownFormProps>({
   form: 'addTodoListTaskForm',
 })(AddNewTaskForm);
 
