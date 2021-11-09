@@ -3,6 +3,7 @@ import styles from '../../../styles/components/TasksItems.module.scss';
 import cn from 'classnames';
 import { SideBarTodoListsType } from '../../../redux/types/types';
 import editImg from '../../../assets/images/edit.svg';
+import { AddTodoListTaskForm } from '../../';
 
 const ActiveTaskList: React.FC<ownProps> = ({ activeTodoList }) => {
   const titleStyle = {
@@ -37,6 +38,10 @@ const ActiveTaskList: React.FC<ownProps> = ({ activeTodoList }) => {
             );
           })}
       </div>
+      {
+        //@ts-ignore
+        <AddTodoListTaskForm activeListId={activeTodoList} />
+      }
     </div>
   );
 };

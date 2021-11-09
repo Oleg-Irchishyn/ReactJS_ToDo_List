@@ -9,6 +9,8 @@ import { getInitialization } from './redux/selectors/appSelectors';
 import cn from 'classnames';
 import { Tasks, TasksItems } from './components';
 import { getActiveTodoList, getIsLoaded } from './redux/selectors/sidebarSelectors';
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
 /* React Lazy example
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -21,7 +23,7 @@ const SuspendedProfile = withSuspense(ProfileContainer);
   /* <Route path="/lists/:id" render={() => <TasksList activeListItem={activeListItem} />} /> */
 }
 
-const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
+const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ initializeApp, initialized, isLoaded, activeTodoList }) => {
     React.useEffect(() => {
       initializeApp();
@@ -59,4 +61,13 @@ type MapDispatchPropsType = {
   initializeApp: () => void;
 };
 
-export default compose<React.ComponentType>(connect(mapStateToProps, { initializeApp }))(App);
+type ownProps = {
+  history: RouteComponentProps['history'];
+};
+
+export default compose<React.ComponentType>(
+  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
+    initializeApp,
+  }),
+  withRouter,
+)(App);

@@ -4,18 +4,25 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getSidebarTodoList } from '../../redux/selectors/sidebarSelectors';
+import { getActiveTodoList, getSidebarTodoList } from '../../redux/selectors/sidebarSelectors';
 import { AppStateType } from '../../redux/store';
 import { SingleTask, AddTasksForm } from '../';
 import { SideBarTodoListsType } from '../../redux/types/types';
+import { actions } from '../../redux/reducers/sidebar';
 
 const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ sidebarTodoList }) => {
+  ({ sidebarTodoList, setActiveTodoList, activeTodoList }) => {
     return (
       <div className={cn(styles.tasks)}>
-        <NavLink className={cn(styles.tasks__items_all)} to="/" title="All tasks" rel="nofollow">
-          All Tasks
-        </NavLink>
+        <div
+          className={cn(styles.tasks__item_wrapper, {
+            [styles.active]: !activeTodoList,
+          })}
+          onClick={() => setActiveTodoList(null)}>
+          <NavLink className={cn(styles.tasks__items_all)} to="/" title="All tasks" rel="nofollow">
+            All Tasks
+          </NavLink>
+        </div>
         {sidebarTodoList &&
           sidebarTodoList.map((elem) => {
             //@ts-ignore
@@ -29,14 +36,19 @@ const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = Rea
 
 const mapStateToProps = (state: AppStateType) => ({
   sidebarTodoList: getSidebarTodoList(state),
+  activeTodoList: getActiveTodoList(state),
 });
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
-type MapDispatchPropsType = {};
+type MapDispatchPropsType = {
+  setActiveTodoList: (obj: SideBarTodoListsType | null) => void;
+};
 type ownProps = {
   elem: SideBarTodoListsType;
 };
 
 export default compose<React.ComponentType>(
-  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {}),
+  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
+    setActiveTodoList: actions.setActiveTodoList,
+  }),
 )(Tasks);

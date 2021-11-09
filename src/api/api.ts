@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SideBarTodoListsType } from '../redux/types/types';
+import { SideBarTodoListsType, TasksType } from '../redux/types/types';
 
 const instance = axios.create({
   withCredentials: true,
@@ -31,5 +31,15 @@ export const todoAPI = {
     return instance
       .delete(`lists/` + id)
       .then((response) => response.data) as Promise<SideBarTodoListsType>;
+  },
+  addNewTodoListTask: (
+    id: string | number,
+    listId: string | number | null,
+    text: string | number,
+    completed: boolean,
+  ) => {
+    return instance.post<TasksType>(`tasks`, { id, listId, text, completed }).then((response) => {
+      return response.data;
+    });
   },
 };

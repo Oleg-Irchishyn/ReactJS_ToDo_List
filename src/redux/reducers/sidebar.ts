@@ -1,15 +1,16 @@
 import { todoAPI } from './../../api/api';
 import { FormAction } from 'redux-form';
 import { BaseThunkType, InferActionsTypes } from '../store';
-import { ColorsType, SideBarTodoListsType } from '../types/types';
+import { ColorsType, SideBarTodoListsType, TasksType } from '../types/types';
 
-const SET_SIDEBAR_TODO_LIST = 'todoApp/SET_SIDEBAR_TODO_LIST';
-const SET_TODO_LIST_COLORS = 'todoApp/SET_TODO_LIST_COLORS';
-const ADD_NEW_TODO_LIST_ITEM = 'todoApp/ADD_NEW_TODO_LIST_ITEM';
-const SET_SELECTED_TODO_LIST_COLOR = 'todoApp/SET_SELECTED_TODO_LIST_COLOR';
+const SET_SIDEBAR_TODO_LIST = 'todoApp/sidebar/SET_SIDEBAR_TODO_LIST';
+const SET_TODO_LIST_COLORS = 'todoApp/sidebar/SET_TODO_LIST_COLORS';
+const ADD_NEW_TODO_LIST_ITEM = 'todoApp/sidebar/ADD_NEW_TODO_LIST_ITEM';
+const SET_SELECTED_TODO_LIST_COLOR = 'todoApp/sidebar/SET_SELECTED_TODO_LIST_COLOR';
 const ISLOADED_SUCCESS = 'todoApp/ISLOADED_SUCCESS';
-const DELETE_TODO_LIST_ITEM = 'todoApp/DELETE_TODO_LIST_ITEM';
-const SET_AVTIVE_TODO_LIST = 'todoApp/SET_AVTIVE_TODO_LIST';
+const DELETE_TODO_LIST_ITEM = 'todoApp/sidebar/DELETE_TODO_LIST_ITEM';
+const SET_AVTIVE_TODO_LIST = 'todoApp/sidebar/SET_AVTIVE_TODO_LIST';
+const ADD_NEW_ACTIVE_TODO_LIST_TASK = 'todoApp/sidebar/ADD_NEW_ACTIVE_TODO_LIST_TASK';
 
 let initialState = {
   sidebarTodoList: [] as Array<SideBarTodoListsType>,
@@ -18,7 +19,7 @@ let initialState = {
   isLoaded: false as boolean,
   activeTodoList: JSON.parse(
     localStorage.getItem('activeTodoList') || '{}',
-  ) as SideBarTodoListsType,
+  ) as SideBarTodoListsType | null,
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
@@ -69,9 +70,23 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         activeTodoList: action.payload,
       };
     }
+    case ADD_NEW_ACTIVE_TODO_LIST_TASK: {
+      if (state.activeTodoList && state.activeTodoList.tasks) {
+        const newTodoTaskList = [...state.activeTodoList.tasks, action.payload];
+        return {
+          ...state,
+          activeTodoList: {
+            ...state.activeTodoList,
+            tasks: newTodoTaskList,
+          },
+        };
+      }
+      break;
+    }
     default:
       return state;
   }
+  return state;
 };
 
 export const actions = {
@@ -89,8 +104,13 @@ export const actions = {
       type: DELETE_TODO_LIST_ITEM,
       id,
     } as const),
-  setActiveTodoList: (obj: SideBarTodoListsType) =>
+  setActiveTodoList: (obj: SideBarTodoListsType | null) =>
     ({ type: SET_AVTIVE_TODO_LIST, payload: obj } as const),
+  setNewActiveTodoListTask: (task: TasksType) =>
+    ({
+      type: ADD_NEW_ACTIVE_TODO_LIST_TASK,
+      payload: task,
+    } as const),
 };
 
 export const getAllSidebarTodoList = (): ThunkType => async (dispatch) => {
