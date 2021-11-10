@@ -51,6 +51,49 @@
         align-items: stretch;
         justify-content: flex-start;
 
+        .tasks__search_field_wrapper {
+            width: 100%;
+            padding: 15px 0 15px 0;
+            position: relative;
+
+            i {
+                position: absolute;
+                right: calc(0% + 5px);
+                top: calc(0px + 39%);
+                transform: translate(-50%, 0);
+                font-size: 16px;
+                color: $color-grey;
+            }
+        }
+
+        .tasks__search_field {
+            font-family: $font-secondary;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            font-weight: 600;
+            color: $color-black;
+            padding: 8px 35px 8px 12px;
+            width: 100%;
+            border: 1px solid $color-input;
+            background: $color-white;
+            box-sizing: border-box;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            &:focus {
+                &::placeholder {
+                    opacity: 0;
+                    transition: 0.2s ease;
+                }
+            }
+            &::placeholder {
+                color: $color-placeholder;
+                font-size: inherit;
+                opacity: 1;
+                transition: 0.2s ease;
+            }
+        }
+
         .task_item {
             position: relative;
             padding: 15px 0 15px 0;
@@ -106,7 +149,7 @@
                 width: 21px;
                 position: absolute;
                 right: calc(0% + 30px);
-                top: calc(0% - 5px);
+                top: calc(0% + 8px);
                 padding: 5px;
                 z-index: 5;
                 transform: rotate(0deg) scale(1);
@@ -131,7 +174,7 @@
                 width: 14px;
                 padding: 5px;
                 right: 0;
-                top: calc(0% + 4px);
+                top: calc(0% + 17px);
                 position: absolute;
                 transform: rotate(0deg) scale(1);
                 transition: 0.2s ease;
@@ -164,6 +207,21 @@
                     height: 2px;
                 }
             }
+        }
+    }
+    &__tasks_empty {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: flex-start;
+        font-family: $font-secondary;
+        font-size: 36px;
+        line-height: normal;
+        font-weight: 700;
+        padding: 15px 0 15px 0;
+        span {
+            margin: 0 5px 0 0;
         }
     }
 }

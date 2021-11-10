@@ -12,9 +12,13 @@ import { RouteComponentProps } from 'react-router-dom';
 
 const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ elem, deleteSidebarTodoList, setActiveTodoList, activeTodoList, history }) => {
-    const { id, name, color } = elem;
+    const { id, name, color, tasks } = elem;
     const colorStyle = {
       backgroundColor: color,
+    };
+
+    const tasksAmountColor = {
+      color: color,
     };
 
     const handleDeleTodoList = (id: string | number) => {
@@ -33,6 +37,11 @@ const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> 
         <NavLink className={cn(styles.tasks__item)} to={`/lists/${id}`} title={name} rel="nofollow">
           <i style={colorStyle}></i>
           <p>{name}</p>
+          {tasks && tasks.length > 0 ? (
+            <span
+              style={tasksAmountColor}
+              className={cn(styles.tasks__item_amount)}>{`(${tasks.length})`}</span>
+          ) : null}
         </NavLink>
         <div className={cn(styles.delete_icon)} onClick={() => handleDeleTodoList(id)}></div>
       </div>
