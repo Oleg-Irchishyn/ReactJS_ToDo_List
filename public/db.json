@@ -46,7 +46,7 @@
     {
       "id": 2,
       "listId": 2,
-      "text": "Изучить паттерны проектирования",
+      "text": "Изучить паттерны проектированияs",
       "completed": false
     },
     {
@@ -131,12 +131,6 @@
       "id": "23e2390f-2822-4194-b4f1-b38c1a74d4d7",
       "listId": 1,
       "text": "faf",
-      "completed": false
-    },
-    {
-      "id": "dc8fe3b5-5f4d-4a92-8697-20f53c1bbfbe",
-      "listId": 1,
-      "text": "fafa",
       "completed": false
     },
     {

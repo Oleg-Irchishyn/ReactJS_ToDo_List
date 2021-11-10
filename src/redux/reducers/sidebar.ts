@@ -9,9 +9,12 @@ const ADD_NEW_TODO_LIST_ITEM = 'todoApp/sidebar/ADD_NEW_TODO_LIST_ITEM';
 const SET_SELECTED_TODO_LIST_COLOR = 'todoApp/sidebar/SET_SELECTED_TODO_LIST_COLOR';
 const ISLOADED_SUCCESS = 'todoApp/ISLOADED_SUCCESS';
 const DELETE_TODO_LIST_ITEM = 'todoApp/sidebar/DELETE_TODO_LIST_ITEM';
+const CHANGE_TODO_LIST_ITEM_NAME = 'todoApp/sidebar/CHANGE_TODO_LIST_ITEM_NAME';
 const SET_AVTIVE_TODO_LIST = 'todoApp/sidebar/SET_AVTIVE_TODO_LIST';
+const CHANGE_ACTIVE_TODO_LIST_NAME = 'todoApp/sidebar/CHANGE_ACTIVE_TODO_LIST_NAME';
 const ADD_NEW_ACTIVE_TODO_LIST_TASK = 'todoApp/sidebar/ADD_NEW_ACTIVE_TODO_LIST_TASK';
-const CHANGE_ACTIVE_TODO_LIST_TASK_NAME = 'todoApp/sidebar/CHANGE_ACTIVE_TODO_LIST_TASK_NAME ';
+const CHANGE_ACTIVE_TODO_LIST_TASK_NAME = 'todoApp/sidebar/CHANGE_ACTIVE_TODO_LIST_TASK_NAME';
+const DELETE_ACTIVE_TODO_LIST_TASK = 'todoApp/sidebar/DELETE_ACTIVE_TODO_LIST_TASK';
 
 let initialState = {
   sidebarTodoList: [] as Array<SideBarTodoListsType>,
@@ -65,6 +68,18 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         sidebarTodoList: updatedTodoListItems,
       };
     }
+    case CHANGE_TODO_LIST_ITEM_NAME: {
+      const newName = state.sidebarTodoList.map((item) => {
+        if (item.id === action.id) {
+          item.name = action.name;
+        }
+        return item;
+      });
+      return {
+        ...state,
+        sidebarTodoList: newName,
+      };
+    }
     case SET_AVTIVE_TODO_LIST: {
       return {
         ...state,
@@ -102,6 +117,33 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
       }
       break;
     }
+    case CHANGE_ACTIVE_TODO_LIST_NAME: {
+      if (state.activeTodoList && state.activeTodoList.name) {
+        return {
+          ...state,
+          activeTodoList: {
+            ...state.activeTodoList,
+            name: action.name,
+          },
+        };
+      }
+      break;
+    }
+    case DELETE_ACTIVE_TODO_LIST_TASK: {
+      if (state.activeTodoList && state.activeTodoList.tasks) {
+        const updatedTodoListTasksItems = [...state.activeTodoList.tasks].filter(
+          (item) => item.id !== action.id,
+        );
+        return {
+          ...state,
+          activeTodoList: {
+            ...state.activeTodoList,
+            tasks: updatedTodoListTasksItems,
+          },
+        };
+      }
+      break;
+    }
     default:
       return state;
   }
@@ -123,6 +165,9 @@ export const actions = {
       type: DELETE_TODO_LIST_ITEM,
       id,
     } as const),
+  changeTodoListItemName: (id: string | number, name: string) =>
+    ({ type: CHANGE_TODO_LIST_ITEM_NAME, id, name } as const),
+
   setActiveTodoList: (obj: SideBarTodoListsType | null) =>
     ({ type: SET_AVTIVE_TODO_LIST, payload: obj } as const),
   setNewActiveTodoListTask: (task: TasksType) =>
@@ -130,8 +175,15 @@ export const actions = {
       type: ADD_NEW_ACTIVE_TODO_LIST_TASK,
       payload: task,
     } as const),
+  changeActiveTodoListName: (id: string | number, name: string) =>
+    ({ type: CHANGE_ACTIVE_TODO_LIST_NAME, id, name } as const),
   changeActiveTodoListTaskName: (id: string | number, text: string | number) =>
     ({ type: CHANGE_ACTIVE_TODO_LIST_TASK_NAME, id, text } as const),
+  deleteActiveTodoListTask: (id: string | number) =>
+    ({
+      type: DELETE_ACTIVE_TODO_LIST_TASK,
+      id,
+    } as const),
 };
 
 export const getAllSidebarTodoList = (): ThunkType => async (dispatch) => {
@@ -162,6 +214,20 @@ export const deleteSidebarTodoList =
     try {
       await todoAPI.removeTodoListItem(id);
       dispatch(actions.deleteTodoListItem(id));
+    } catch (err) {
+      throw new Error(`Promise has not been resolved properly`);
+    } finally {
+      dispatch(actions.isLoadedSuccess());
+    }
+  };
+
+export const changeTodoListItemName =
+  (id: string | number, name: string): ThunkType =>
+  async (dispatch) => {
+    try {
+      await todoAPI.renameTodoListItem(id, name);
+      dispatch(actions.changeTodoListItemName(id, name));
+      dispatch(actions.changeActiveTodoListName(id, name));
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);
     } finally {

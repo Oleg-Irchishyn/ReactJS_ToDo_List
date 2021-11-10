@@ -6,8 +6,8 @@ import { actions as sbActions } from './sidebar';
 
 const SET_TODO_LIST_TASKS = 'todoApp/tasks/SET_TODO_LIST_TASKS';
 const ADD_NEW_TODO_LIST_TASKS = 'todoApp/tasks/ADD_NEW_TODO_LIST_TASKS';
-
 const CHANGE_TODO_LIST_TASK_NAME = 'todoApp/tasks/CHANGE_TODO_LIST_TASK_NAME';
+const DELETE_TASKS_LIST_ITEM = 'todoApp/tasks/DELETE_TASKS_LIST_ITEM';
 
 let initialState = {
   todoListTasks: [] as Array<TasksType>,
@@ -40,6 +40,14 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         todoListTasks: newTaskName,
       };
     }
+
+    case DELETE_TASKS_LIST_ITEM: {
+      const updatedTodoListItems = [...state.todoListTasks].filter((item) => item.id !== action.id);
+      return {
+        ...state,
+        todoListTasks: updatedTodoListItems,
+      };
+    }
     default:
       return state;
   }
@@ -55,6 +63,7 @@ export const actions = {
     } as const),
   changeTodoListTaskName: (id: string | number, text: string | number) =>
     ({ type: CHANGE_TODO_LIST_TASK_NAME, id, text } as const),
+  deleteTodoListTaskItem: (id: string | number) => ({ type: DELETE_TASKS_LIST_ITEM, id } as const),
 };
 
 export const getAllTodoListTasks = (): ThunkType => async (dispatch) => {
@@ -94,6 +103,20 @@ export const setNewTodoListTaskName =
       await todoAPI.renameTodoListTask(id, newVal);
       dispatch(actions.changeTodoListTaskName(id, newVal));
       dispatch(sbActions.changeActiveTodoListTaskName(id, newVal));
+    } catch (err) {
+      throw new Error(`Promise has not been resolved properly`);
+    } finally {
+      dispatch(sbActions.isLoadedSuccess());
+    }
+  };
+
+export const deleteTodoListTask =
+  (id: string | number): ThunkType =>
+  async (dispatch) => {
+    try {
+      await todoAPI.removeTodoListTask(id);
+      dispatch(actions.deleteTodoListTaskItem(id));
+      dispatch(sbActions.deleteActiveTodoListTask(id));
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);
     } finally {

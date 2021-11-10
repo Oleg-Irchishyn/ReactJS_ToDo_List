@@ -7,11 +7,15 @@ import { AddTodoListTaskForm } from '../../';
 import { AppStateType } from '../../../redux/store';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { setNewTodoListTaskName } from '../../../redux/reducers/tasks';
+import { changeTodoListItemName } from '../../../redux/reducers/sidebar';
+import { setNewTodoListTaskName, deleteTodoListTask } from '../../../redux/reducers/tasks';
 import { getActiveTodoList } from '../../../redux/selectors/sidebarSelectors';
 
 const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = ({
   activeTodoList,
+  setNewTodoListTaskName,
+  deleteTodoListTask,
+  changeTodoListItemName,
 }) => {
   const titleStyle = {
     color: activeTodoList && activeTodoList.color,
@@ -24,11 +28,24 @@ const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownPro
     }
   };
 
+  const onDeleteTaskItem = (id: string | number) => {
+    if (window.confirm(`Do you want to remove this task?`)) {
+      deleteTodoListTask(id);
+    } else return false;
+  };
+
+  const onChangeActiveListName = (id: string | number, name: string) => {
+    const newTodoListName = window.prompt(`List's Name`, (name = String(name)));
+    if (newTodoListName) {
+      changeTodoListItemName(id, name);
+    }
+  };
+
   return (
     <div className={cn(styles.activetask)}>
       <h2 style={titleStyle} className={cn(styles.activetask__title)}>
         <span>{activeTodoList && activeTodoList.name}</span>
-        <i>
+        <i onClick={() => onChangeActiveListName(activeTodoList.id, activeTodoList.name)}>
           <img src={editImg} alt={editImg} />
         </i>
       </h2>
@@ -43,7 +60,7 @@ const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownPro
                   onClick={() => onEditTaskName(obj.id, obj.text)}>
                   <img src={editImg} alt={editImg} />
                 </i>
-                <i className={cn(styles.item_delete)}></i>
+                <i className={cn(styles.item_delete)} onClick={() => onDeleteTaskItem(obj.id)}></i>
                 <input
                   id={`task - ${obj.id}`}
                   type="checkbox"
@@ -70,6 +87,8 @@ const mapStateToProps = (state: AppStateType) => ({
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   setNewTodoListTaskName: (id: string | number, newVal: string | number) => void;
+  deleteTodoListTask: (id: string | number) => void;
+  changeTodoListItemName: (id: string | number, name: string) => void;
 };
 
 type ownProps = {
@@ -79,5 +98,7 @@ type ownProps = {
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setNewTodoListTaskName,
+    deleteTodoListTask,
+    changeTodoListItemName,
   }),
 )(ActiveTaskList);

@@ -32,6 +32,11 @@ export const todoAPI = {
       .delete(`lists/` + id)
       .then((response) => response.data) as Promise<SideBarTodoListsType>;
   },
+  renameTodoListItem: (id: string | number, newVal: string) => {
+    return instance
+      .patch<SideBarTodoListsType>(`lists/` + id, { name: newVal })
+      .then((response) => response.data);
+  },
   addNewTodoListTask: (
     id: string | number,
     listId: string | number | null,
@@ -46,5 +51,9 @@ export const todoAPI = {
     return instance
       .patch<TasksType>(`tasks/` + id, { text: newVal })
       .then((response) => response.data);
+  },
+
+  removeTodoListTask: (id: string | number) => {
+    return instance.delete(`tasks/` + id).then((response) => response.data) as Promise<TasksType>;
   },
 };
