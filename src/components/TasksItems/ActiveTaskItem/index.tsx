@@ -8,7 +8,11 @@ import { AppStateType } from '../../../redux/store';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { changeTodoListItemName } from '../../../redux/reducers/sidebar';
-import { setNewTodoListTaskName, deleteTodoListTask } from '../../../redux/reducers/tasks';
+import {
+  setNewTodoListTaskName,
+  deleteTodoListTask,
+  toggleTaskCompletion,
+} from '../../../redux/reducers/tasks';
 import { getActiveTodoList } from '../../../redux/selectors/sidebarSelectors';
 
 const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = ({
@@ -16,6 +20,7 @@ const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownPro
   setNewTodoListTaskName,
   deleteTodoListTask,
   changeTodoListItemName,
+  toggleTaskCompletion,
 }) => {
   const titleStyle = {
     color: activeTodoList && activeTodoList.color,
@@ -37,7 +42,7 @@ const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownPro
   const onChangeActiveListName = (id: string | number, name: string) => {
     const newTodoListName = window.prompt(`List's Name`, (name = String(name)));
     if (newTodoListName) {
-      changeTodoListItemName(id, name);
+      changeTodoListItemName(id, newTodoListName);
     }
   };
 
@@ -65,7 +70,7 @@ const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownPro
                   id={`task - ${obj.id}`}
                   type="checkbox"
                   checked={obj.completed}
-                  onChange={() => console.log('yo')}
+                  onChange={() => toggleTaskCompletion(obj.id, obj.listId, !obj.completed)}
                 />
                 <label htmlFor={`task - ${obj.id}`}>{obj.text}</label>
               </div>
@@ -89,6 +94,11 @@ type MapDispatchPropsType = {
   setNewTodoListTaskName: (id: string | number, newVal: string | number) => void;
   deleteTodoListTask: (id: string | number) => void;
   changeTodoListItemName: (id: string | number, name: string) => void;
+  toggleTaskCompletion: (
+    id: string | number,
+    listId: string | number | null,
+    completed: boolean,
+  ) => void;
 };
 
 type ownProps = {
@@ -100,5 +110,6 @@ export default compose<React.ComponentType>(
     setNewTodoListTaskName,
     deleteTodoListTask,
     changeTodoListItemName,
+    toggleTaskCompletion,
   }),
 )(ActiveTaskList);

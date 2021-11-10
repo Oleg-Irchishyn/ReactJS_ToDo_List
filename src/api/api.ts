@@ -52,8 +52,16 @@ export const todoAPI = {
       .patch<TasksType>(`tasks/` + id, { text: newVal })
       .then((response) => response.data);
   },
-
   removeTodoListTask: (id: string | number) => {
     return instance.delete(`tasks/` + id).then((response) => response.data) as Promise<TasksType>;
+  },
+  toggleTodoListTaskCompletion: (
+    id: string | number,
+    listId: string | number | null,
+    completed: boolean,
+  ) => {
+    return instance
+      .patch<TasksType>(`tasks/` + id, { listId, completed })
+      .then((response) => response.data);
   },
 };

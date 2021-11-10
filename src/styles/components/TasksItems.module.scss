@@ -29,11 +29,18 @@
         padding: 0 0 30px 0;
         margin: 0;
         border-bottom: 1px solid #f2f2f2;
-
         i {
+            position: relative;
             padding: 5px;
             cursor: pointer;
             margin-left: 10px;
+            transition: 0.2s ease;
+            @media (min-width: 992px) {
+                &:hover {
+                    transition: 0.2s ease;
+                    opacity: 0.7;
+                }
+            }
         }
     }
     &__tasks {
@@ -62,6 +69,7 @@
                 line-height: normal;
                 color: $color-black;
                 padding: 0 0 0 35px;
+                text-decoration: none;
                 cursor: pointer;
                 &::before {
                     content: "";
@@ -78,6 +86,7 @@
             }
             input[type="checkbox"]:checked + label {
                 line-height: 1;
+                text-decoration: line-through;
                 &::before {
                     content: "\2713";
                     position: absolute;

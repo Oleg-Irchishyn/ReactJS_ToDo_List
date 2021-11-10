@@ -34,6 +34,11 @@
       "name": "Курс по ReactJS ToDo",
       "colorId": 7,
       "id": 7
+    },
+    {
+      "id": "1ad1d8ad-406f-4e34-9882-a354936fd89a",
+      "name": "hujhozhik",
+      "colorId": 8
     }
   ],
   "tasks": [
@@ -41,7 +46,7 @@
       "id": 1,
       "listId": 2,
       "text": "Изучить JavaScript",
-      "completed": true
+      "completed": false
     },
     {
       "id": 2,
@@ -53,7 +58,7 @@
       "id": 3,
       "listId": 2,
       "text": "ReactJS Hooks (useState, useReducer, useEffect и т.д.)",
-      "completed": true
+      "completed": false
     },
     {
       "id": 4,
@@ -155,6 +160,18 @@
       "id": "95871b52-4c49-488e-a639-5d34c42f2a8d",
       "listId": 3,
       "text": "Новый фильм",
+      "completed": false
+    },
+    {
+      "id": "456a69f4-b2c2-4a31-809f-a48f6654eaa3",
+      "listId": "1ad1d8ad-406f-4e34-9882-a354936fd89a",
+      "text": "pepep",
+      "completed": false
+    },
+    {
+      "id": "13d0eef1-e0a9-4346-a1a2-d2772345bbb1",
+      "listId": "1ad1d8ad-406f-4e34-9882-a354936fd89a",
+      "text": "234245",
       "completed": false
     }
   ],

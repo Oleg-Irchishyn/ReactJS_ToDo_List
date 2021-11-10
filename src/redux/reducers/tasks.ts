@@ -8,6 +8,7 @@ const SET_TODO_LIST_TASKS = 'todoApp/tasks/SET_TODO_LIST_TASKS';
 const ADD_NEW_TODO_LIST_TASKS = 'todoApp/tasks/ADD_NEW_TODO_LIST_TASKS';
 const CHANGE_TODO_LIST_TASK_NAME = 'todoApp/tasks/CHANGE_TODO_LIST_TASK_NAME';
 const DELETE_TASKS_LIST_ITEM = 'todoApp/tasks/DELETE_TASKS_LIST_ITEM';
+const CHANGE_TODO_LIST_TASK_COMPLETION = 'todoApp/tasks/CHANGE_TODO_LIST_TASK_COMPLETION';
 
 let initialState = {
   todoListTasks: [] as Array<TasksType>,
@@ -40,12 +41,24 @@ const appReducer = (state = initialState, action: ActionsTypes): initialStateTyp
         todoListTasks: newTaskName,
       };
     }
-
     case DELETE_TASKS_LIST_ITEM: {
       const updatedTodoListItems = [...state.todoListTasks].filter((item) => item.id !== action.id);
       return {
         ...state,
         todoListTasks: updatedTodoListItems,
+      };
+    }
+    case CHANGE_TODO_LIST_TASK_COMPLETION: {
+      const newTodoTasksList = [...state.todoListTasks].map((item) => {
+        if (item.id === action.id) {
+          item.completed = action.completed;
+        }
+        return item;
+      });
+
+      return {
+        ...state,
+        todoListTasks: newTodoTasksList,
       };
     }
     default:
@@ -64,6 +77,8 @@ export const actions = {
   changeTodoListTaskName: (id: string | number, text: string | number) =>
     ({ type: CHANGE_TODO_LIST_TASK_NAME, id, text } as const),
   deleteTodoListTaskItem: (id: string | number) => ({ type: DELETE_TASKS_LIST_ITEM, id } as const),
+  changeTodoListTaskCompletion: (id: string | number, completed: boolean) =>
+    ({ type: CHANGE_TODO_LIST_TASK_COMPLETION, id, completed } as const),
 };
 
 export const getAllTodoListTasks = (): ThunkType => async (dispatch) => {
@@ -117,6 +132,20 @@ export const deleteTodoListTask =
       await todoAPI.removeTodoListTask(id);
       dispatch(actions.deleteTodoListTaskItem(id));
       dispatch(sbActions.deleteActiveTodoListTask(id));
+    } catch (err) {
+      throw new Error(`Promise has not been resolved properly`);
+    } finally {
+      dispatch(sbActions.isLoadedSuccess());
+    }
+  };
+
+export const toggleTaskCompletion =
+  (id: string | number, listId: string | number | null, completed: boolean): ThunkType =>
+  async (dispatch) => {
+    try {
+      await todoAPI.toggleTodoListTaskCompletion(id, listId, completed);
+      dispatch(actions.changeTodoListTaskCompletion(id, completed));
+      dispatch(sbActions.changeActiveTodoListTaskCompletion(id, completed));
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);
     } finally {
