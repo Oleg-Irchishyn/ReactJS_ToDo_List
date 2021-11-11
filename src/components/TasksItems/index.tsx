@@ -6,27 +6,42 @@ import { compose } from 'redux';
 import styles from '../../styles/components/TasksItems.module.scss';
 import cn from 'classnames';
 import { AppStateType } from '../../redux/store';
-import { getActiveTodoList } from '../../redux/selectors/sidebarSelectors';
-import { ActiveTaskList } from '../';
+import { getSidebarTodoList } from '../../redux/selectors/sidebarSelectors';
+import { ActiveTaskList, AllTasksItem } from '../';
+import { SideBarTodoListsType } from '../../redux/types/types';
 
-const TasksItems: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
-  ({ activeTodoList }) => {
+const TasksItems: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
+  ({ sidebarTodoList }) => {
     return (
       <div className={cn(styles.taskItems)}>
-        <Route path="/lists/:id" render={() => <ActiveTaskList />} />
+        <Route exact path="/lists/:id" render={() => <ActiveTaskList />} />
+        {sidebarTodoList.map((listItem) => {
+          return (
+            <Route
+              exact
+              path="/"
+              //@ts-ignore
+              render={() => <AllTasksItem key={listItem.id} listItem={listItem} />}
+            />
+          );
+        })}
       </div>
     );
   },
 );
 
 const mapStateToProps = (state: AppStateType) => ({
-  activeTodoList: getActiveTodoList(state),
+  sidebarTodoList: getSidebarTodoList(state),
 });
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {};
 
+type ownProps = {
+  listItem: SideBarTodoListsType;
+};
+
 export default compose<React.ComponentType>(
-  connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {}),
+  connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {}),
   withRouter,
 )(TasksItems);

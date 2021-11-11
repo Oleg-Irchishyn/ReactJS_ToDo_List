@@ -4,4 +4,5 @@ export { default as AddTasksForm } from './Tasks/AddTasksForm';
 export { default as TasksItems } from './TasksItems';
 export { default as ColorBadges } from './Tasks/AddTasksForm/ColorBadges';
 export { default as ActiveTaskList } from './TasksItems/ActiveTaskItem';
+export { default as AllTasksItem } from './TasksItems/AllTasksItem';
 export { default as AddTodoListTaskForm } from './AddTodoListTaskForm';
