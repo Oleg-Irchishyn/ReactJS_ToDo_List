@@ -23,9 +23,9 @@ let initialState = {
   colors: [] as Array<ColorsType>,
   selectedTodoListColor: 1 as number | string,
   isLoaded: false as boolean,
-  activeTodoList: JSON.parse(
-    localStorage.getItem('activeTodoList') || '{}',
-  ) as SideBarTodoListsType | null,
+  activeTodoList: JSON.parse(localStorage.getItem('activeTodoList') || '{}') as
+    | SideBarTodoListsType
+    | '',
 };
 
 const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
@@ -189,7 +189,7 @@ export const actions = {
   changeTodoListItemName: (id: string | number, name: string) =>
     ({ type: CHANGE_TODO_LIST_ITEM_NAME, id, name } as const),
 
-  setActiveTodoList: (obj: SideBarTodoListsType | null) =>
+  setActiveTodoList: (obj: SideBarTodoListsType | '') =>
     ({ type: SET_AVTIVE_TODO_LIST, payload: obj } as const),
   setNewActiveTodoListTask: (task: TasksType) =>
     ({

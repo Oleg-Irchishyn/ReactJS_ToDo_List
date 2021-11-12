@@ -8,7 +8,11 @@ import { initializeApp } from './redux/reducers/app';
 import { getInitialization } from './redux/selectors/appSelectors';
 import cn from 'classnames';
 import { Tasks, TasksItems } from './components';
-import { getActiveTodoList, getIsLoaded } from './redux/selectors/sidebarSelectors';
+import {
+  getActiveTodoList,
+  getIsLoaded,
+  getSidebarTodoList,
+} from './redux/selectors/sidebarSelectors';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router-dom';
 import { SideBarTodoListsType } from './redux/types/types';
@@ -26,11 +30,31 @@ const SuspendedProfile = withSuspense(ProfileContainer);
 }
 
 const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ initializeApp, setActiveTodoList, initialized, isLoaded, activeTodoList, history }) => {
+  ({
+    initializeApp,
+    setActiveTodoList,
+    initialized,
+    isLoaded,
+    activeTodoList,
+    sidebarTodoList,
+    history,
+  }) => {
+    // const changeActiveId = () => {
+    //   let hs: string | number = history.location.pathname.substr(7);
+    //   let activeId = activeTodoList && activeTodoList.id;
+    //   sidebarTodoList.filter((item) => {
+    //     if (item.id === hs && hs !== activeId) {
+    //       history.push(`/lists/${item.id}`);
+    //       setActiveTodoList(item);
+    //     }
+    //     return item;
+    //   });
+    // };
+
     React.useEffect(() => {
       initializeApp();
       if (history.location.pathname === '/') {
-        setActiveTodoList(null);
+        setActiveTodoList('');
       }
     }, []);
 
@@ -59,12 +83,13 @@ const mapStateToProps = (state: AppStateType) => ({
   initialized: getInitialization(state),
   isLoaded: getIsLoaded(state),
   activeTodoList: getActiveTodoList(state),
+  sidebarTodoList: getSidebarTodoList(state),
 });
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   initializeApp: () => void;
-  setActiveTodoList: (obj: SideBarTodoListsType | null) => void;
+  setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
 };
 
 type ownProps = {

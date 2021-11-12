@@ -18,7 +18,7 @@ const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = Rea
           className={cn(styles.tasks__item_wrapper, {
             [styles.active]: !activeTodoList,
           })}
-          onClick={() => setActiveTodoList(null)}>
+          onClick={() => setActiveTodoList('')}>
           <NavLink className={cn(styles.tasks__items_all)} to="/" title="All tasks" rel="nofollow">
             All Tasks
           </NavLink>
@@ -41,7 +41,7 @@ const mapStateToProps = (state: AppStateType) => ({
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
-  setActiveTodoList: (obj: SideBarTodoListsType | null) => void;
+  setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
 };
 type ownProps = {
   elem: SideBarTodoListsType;
