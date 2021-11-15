@@ -39,17 +39,17 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
     sidebarTodoList,
     history,
   }) => {
-    // const changeActiveId = () => {
-    //   let hs: string | number = history.location.pathname.substr(7);
-    //   let activeId = activeTodoList && activeTodoList.id;
-    //   sidebarTodoList.filter((item) => {
-    //     if (item.id === hs && hs !== activeId) {
-    //       history.push(`/lists/${item.id}`);
-    //       setActiveTodoList(item);
-    //     }
-    //     return item;
-    //   });
-    // };
+    const handleChangeActiveId = React.useCallback(() => {
+      let hs: string | number = history.location.pathname.substr(7);
+      let activeId = activeTodoList && activeTodoList.id;
+
+      if (hs !== activeId) {
+        history.push(`/lists/${activeId}`);
+      } else if (hs === '') {
+        history.push(`/`);
+      }
+      console.log(hs);
+    }, [history.location.pathname]);
 
     React.useEffect(() => {
       initializeApp();
@@ -57,6 +57,10 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
         setActiveTodoList('');
       }
     }, []);
+
+    React.useEffect(() => {
+      handleChangeActiveId();
+    }, [history.location.pathname]);
 
     React.useEffect(() => {
       localStorage.setItem('activeTodoList', JSON.stringify(activeTodoList));
