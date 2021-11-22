@@ -7,21 +7,27 @@ import styles from '../../styles/components/TasksItems.module.scss';
 import cn from 'classnames';
 import { AppStateType } from '../../redux/store';
 import { getSidebarTodoList } from '../../redux/selectors/sidebarSelectors';
-import { ActiveTaskList, AllTasksItem } from '../';
 import { SideBarTodoListsType } from '../../redux/types/types';
+import { withSuspense } from '../../hoc/WithSuspense';
+
+const ActiveTaskList = React.lazy(() => import('../TasksItems/ActiveTaskItem/'));
+const AllTasksItem = React.lazy(() => import('../TasksItems/AllTasksItem/'));
+
+const SuspendedActiveTaskList = withSuspense(ActiveTaskList);
+const SuspendedAllTasksItem = withSuspense(AllTasksItem);
 
 const TasksItems: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ sidebarTodoList }) => {
     return (
       <div className={cn(styles.taskItems)}>
-        <Route exact path="/lists/:id" render={() => <ActiveTaskList />} />
+        <Route exact path="/lists/:id" render={() => <SuspendedActiveTaskList />} />
         {sidebarTodoList.map((listItem) => {
           return (
             <Route
               exact
               path="/"
               //@ts-ignore
-              render={() => <AllTasksItem key={listItem.id} listItem={listItem} />}
+              render={() => <SuspendedAllTasksItem key={listItem.id} listItem={listItem} />}
             />
           );
         })}

@@ -1,4 +1,4 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import React from 'react';
 import styles from '../../../styles/components/TasksItems.module.scss';
 import cn from 'classnames';
 import { SideBarTodoListsType } from '../../../redux/types/types';

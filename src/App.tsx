@@ -8,37 +8,14 @@ import { initializeApp } from './redux/reducers/app';
 import { getInitialization } from './redux/selectors/appSelectors';
 import cn from 'classnames';
 import { Tasks, TasksItems } from './components';
-import {
-  getActiveTodoList,
-  getIsLoaded,
-  getSidebarTodoList,
-} from './redux/selectors/sidebarSelectors';
+import { getActiveTodoList, getIsLoaded } from './redux/selectors/sidebarSelectors';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router-dom';
 import { SideBarTodoListsType } from './redux/types/types';
 import { actions } from './redux/reducers/sidebar';
 
-/* React Lazy example
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
-const SuspendedProfile = withSuspense(ProfileContainer);
-
-/* React Routes example
-/* <Route path="*" render={() => <div>404 NOT FOUND</div>} /> */
-/*<Route path="/profile/:userId?" render={() => <SuspendedProfile />} />*/
-{
-  /* <Route path="/lists/:id" render={() => <TasksList activeListItem={activeListItem} />} /> */
-}
-
 const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({
-    initializeApp,
-    setActiveTodoList,
-    initialized,
-    isLoaded,
-    activeTodoList,
-    sidebarTodoList,
-    history,
-  }) => {
+  ({ initializeApp, setActiveTodoList, initialized, isLoaded, activeTodoList, history }) => {
     const handleChangeActiveId = React.useCallback(() => {
       let hs: string | number = history.location.pathname.substr(7);
       let activeId = activeTodoList && activeTodoList.id;
@@ -87,7 +64,6 @@ const mapStateToProps = (state: AppStateType) => ({
   initialized: getInitialization(state),
   isLoaded: getIsLoaded(state),
   activeTodoList: getActiveTodoList(state),
-  sidebarTodoList: getSidebarTodoList(state),
 });
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
