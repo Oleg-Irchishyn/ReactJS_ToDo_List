@@ -9,6 +9,7 @@ import { AppStateType } from '../../redux/store';
 import { getSidebarTodoList } from '../../redux/selectors/sidebarSelectors';
 import { SideBarTodoListsType } from '../../redux/types/types';
 import { withSuspense } from '../../hoc/WithSuspense';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const ActiveTaskList = React.lazy(() => import('../TasksItems/ActiveTaskItem/'));
 const AllTasksItem = React.lazy(() => import('../TasksItems/AllTasksItem/'));
@@ -20,17 +21,26 @@ const TasksItems: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> 
   ({ sidebarTodoList }) => {
     return (
       <div className={cn(styles.taskItems)}>
-        <Route exact path="/lists/:id" render={() => <SuspendedActiveTaskList />} />
-        {sidebarTodoList.map((listItem) => {
-          return (
-            <Route
-              exact
-              path="/"
-              //@ts-ignore
-              render={() => <SuspendedAllTasksItem key={listItem.id} listItem={listItem} />}
-            />
-          );
-        })}
+        <Scrollbars
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+          thumbSize={30}
+          renderThumbVertical={(props) => <div {...props} className="thumb_vertical" />}
+          renderThumbHorizontal={(props) => <div {...props} className="thumb_horizontal" />}>
+          <Route exact path="/lists/:id" render={() => <SuspendedActiveTaskList />} />
+          {sidebarTodoList.map((listItem) => {
+            return (
+              <Route
+                exact
+                path="/"
+                //@ts-ignore
+                render={() => <SuspendedAllTasksItem key={listItem.id} listItem={listItem} />}
+              />
+            );
+          })}
+        </Scrollbars>
       </div>
     );
   },

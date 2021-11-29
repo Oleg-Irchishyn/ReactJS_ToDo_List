@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import './variables.scss';
 
 * {
   -webkit-font-smoothing: antialiased;
@@ -42,5 +42,38 @@ body {
   #root {
     height: 100%;
     width: 100%;
+  }
+
+  .thumb_vertical {
+    background: $bg-btn;
+    border-radius: 2em;
+    animation: thumbColorToggle 5s ease-in-out infinite both;
+    box-shadow: 0px 0px 24px -12px rgba(0, 0, 0, 0.75);
+    top: 0;
+    right: 0px;
+  }
+
+  .thumb_horizontal {
+    background: $bg-btn;
+    border-radius: 2em;
+    animation: thumbColorToggle 5s ease-in-out infinite both;
+    box-shadow: 0px 0px 24px -12px rgba(0, 0, 0, 0.75);
+    bottom: 0px;
+    left: 0;
+  }
+
+  @keyframes thumbColorToggle {
+    0% {
+      background: $bg-btn;
+    }
+    50% {
+      background: $color-black;
+    }
+    75% {
+      background: $color-active;
+    }
+    100% {
+      background: $bg-btn;
+    }
   }
 }

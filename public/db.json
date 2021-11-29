@@ -34,6 +34,11 @@
       "name": "ReactJS ToDos Project",
       "colorId": 7,
       "id": 7
+    },
+    {
+      "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
+      "name": "Swimming",
+      "colorId": 8
     }
   ],
   "tasks": [
@@ -101,7 +106,7 @@
       "id": "ff107594-d72b-49fa-9835-6db33effca35",
       "listId": 1,
       "text": "Sour Cream",
-      "completed": false
+      "completed": true
     },
     {
       "id": "71859355-9c5a-40a7-98b3-6f00d35e9e70",
@@ -113,7 +118,7 @@
       "id": "2ac78734-0244-4b8b-83fb-17786b97f36c",
       "listId": 1,
       "text": "chicken soup 2",
-      "completed": false
+      "completed": true
     },
     {
       "id": "b148eca1-65fe-4a3f-b5f0-ba517f2b242b",
@@ -125,6 +130,12 @@
       "id": "8974fdd2-563e-48ac-bab2-d3c7ce3d9cbf",
       "listId": 5,
       "text": "Eat a waffle cake",
+      "completed": false
+    },
+    {
+      "id": "492018b0-cf8c-458a-8fc6-17e3fe946839",
+      "listId": 3,
+      "text": "Darrel's squirrels",
       "completed": false
     }
   ],
