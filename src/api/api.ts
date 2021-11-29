@@ -3,7 +3,7 @@ import { SideBarTodoListsType, TasksType } from '../redux/types/types';
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: 'http://localhost:3001/',
+  baseURL: '/',
 });
 
 export const todoAPI = {
