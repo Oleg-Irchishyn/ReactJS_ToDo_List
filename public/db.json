@@ -12,7 +12,7 @@
     },
     {
       "id": 3,
-      "name": "TV films and series",
+      "name": "TV films and series?",
       "colorId": 3
     },
     {
@@ -140,7 +140,7 @@
     {
       "id": "492018b0-cf8c-458a-8fc6-17e3fe946839",
       "listId": 3,
-      "text": "Darrel's squirrels",
+      "text": "Darrel's squirrel",
       "completed": false
     }
   ],
