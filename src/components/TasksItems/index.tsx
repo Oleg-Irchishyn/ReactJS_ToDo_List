@@ -18,9 +18,12 @@ const SuspendedActiveTaskList = withSuspense(ActiveTaskList);
 const SuspendedAllTasksItem = withSuspense(AllTasksItem);
 
 const TasksItems: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ sidebarTodoList }) => {
+  ({ sidebarTodoList, shrinkedSidebar }) => {
     return (
-      <div className={cn(styles.taskItems)}>
+      <div
+        className={cn(styles.taskItems, {
+          [styles.hidden]: shrinkedSidebar,
+        })}>
         <Scrollbars
           style={{
             width: '100%',

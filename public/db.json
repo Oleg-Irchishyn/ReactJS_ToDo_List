@@ -41,34 +41,9 @@
       "colorId": 8
     },
     {
-      "id": "9e27d316-79cc-4952-b830-27595dd61ed2",
-      "name": "'k'",
-      "colorId": 4
-    },
-    {
-      "id": "5f882229-3f0c-430e-96b6-f05539d7f630",
-      "name": "'k'k",
-      "colorId": 7
-    },
-    {
-      "id": "df3b7efb-d1cf-447c-ba5c-c46ab8b87ac5",
-      "name": "gsgsg",
-      "colorId": 5
-    },
-    {
-      "id": "e5e54dcf-8f8e-4f25-81ce-55c3b25fa505",
-      "name": "fafa",
-      "colorId": 4
-    },
-    {
-      "id": "52d80a0e-7ebd-4e5a-b157-bea7d9fc8cbf",
-      "name": "agag",
-      "colorId": 1
-    },
-    {
-      "id": "85613e4b-38f8-45d6-b876-1dd03a0e9a21",
-      "name": "kg",
-      "colorId": 5
+      "id": "37bfdeed-81be-4a19-8fd2-b3e9e0353aa6",
+      "name": "test task",
+      "colorId": 3
     }
   ],
   "tasks": [

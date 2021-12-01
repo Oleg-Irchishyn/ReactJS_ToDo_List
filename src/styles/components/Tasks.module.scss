@@ -23,6 +23,10 @@
   @include md-devices {
     max-width: 30%;
   }
+
+  @include sm-devices {
+    padding: 25px 10px 25px 10px;
+  }
   &__item_wrapper {
     display: inline-flex;
     align-items: center;
@@ -219,7 +223,7 @@
   }
   &.large {
     @include sm-devices {
-      max-width: 95%;
+      max-width: 100%;
     }
   }
   &.small {
