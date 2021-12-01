@@ -11,7 +11,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   max-height: 500px;
-  overflow: hidden;
+  overflow-x: visible;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -196,12 +196,18 @@
     }
   }
 
+  &__items_form_wrapper {
+    position: relative;
+    max-width: 235px;
+    min-width: 235px;
+  }
+
   &__icon {
     display: none;
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
-    right: 0;
+    right: -10px;
     cursor: pointer;
     i {
       font-size: 24px;
@@ -212,22 +218,26 @@
     }
   }
   &.large {
-    max-width: 80%;
+    @include sm-devices {
+      max-width: 95%;
+    }
   }
   &.small {
-    max-width: 17%;
+    @include sm-devices {
+      max-width: 17%;
 
-    .tasks__item {
-      p {
-        display: none;
+      .tasks__item {
+        p {
+          font-size: 0;
+        }
       }
-    }
-    .tasks__items_all {
-      font-size: 0;
-    }
-    .tasks__items_add_btn {
-      span {
-        display: none;
+      .tasks__items_all {
+        font-size: 0;
+      }
+      .tasks__items_add_btn {
+        span {
+          display: none;
+        }
       }
     }
   }

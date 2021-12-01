@@ -53,7 +53,7 @@ const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
       setNewTodoListItem(id, name, colorId);
     };
     return (
-      <div ref={popupFormRef}>
+      <div className={cn(taskSstyles.tasks__items_form_wrapper)} ref={popupFormRef}>
         <div className={cn(taskSstyles.tasks__items_add_btn)} onClick={showAddTaskFormPopup}>
           {!visibleForm ? <b>+</b> : <b>-</b>} <span>Add list</span>
         </div>
