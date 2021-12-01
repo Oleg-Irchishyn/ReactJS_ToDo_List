@@ -13,6 +13,10 @@
   max-height: 500px;
   overflow: hidden;
 
+  @include md-devices {
+    padding: 35px;
+  }
+
   div {
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -147,6 +151,9 @@
         padding: 0 0 0 35px;
         text-decoration: none;
         cursor: pointer;
+        @include md-devices {
+          font-size: 14px;
+        }
         &::before {
           content: '';
           position: absolute;
@@ -246,13 +253,17 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
+    align-items: flex-start;
     justify-content: flex-start;
     font-family: $font-secondary;
     font-size: 36px;
     line-height: normal;
     font-weight: 700;
     padding: 15px 0 15px 0;
+    text-align: left;
+    @include md-devices {
+      font-size: 26px;
+    }
     span {
       margin: 0 5px 0 0;
     }

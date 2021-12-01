@@ -11,9 +11,19 @@ import { SideBarTodoListsType } from '../../redux/types/types';
 import { actions } from '../../redux/reducers/sidebar';
 
 const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ sidebarTodoList, setActiveTodoList, activeTodoList }) => {
+  ({
+    sidebarTodoList,
+    setActiveTodoList,
+    activeTodoList,
+    handleToggleShrinkedSidebar,
+    shrinkedSidebar,
+  }) => {
     return (
-      <div className={cn(styles.tasks)}>
+      <div
+        className={cn(styles.tasks, {
+          [styles.large]: shrinkedSidebar,
+          [styles.small]: !shrinkedSidebar,
+        })}>
         <div
           className={cn(styles.tasks__item_wrapper, {
             [styles.active]: !activeTodoList,
@@ -29,6 +39,16 @@ const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = Rea
             return <SingleTask key={elem.id} elem={elem} />;
           })}
         <AddTasksForm />
+
+        <div
+          className={cn(styles.tasks__icon)}
+          onClick={() => handleToggleShrinkedSidebar(!shrinkedSidebar)}>
+          {shrinkedSidebar ? (
+            <i className="fa fa-hand-o-left"></i>
+          ) : (
+            <i className="fa fa-hand-o-right"></i>
+          )}
+        </div>
       </div>
     );
   },
@@ -45,6 +65,8 @@ type MapDispatchPropsType = {
 };
 type ownProps = {
   elem: SideBarTodoListsType;
+  handleToggleShrinkedSidebar: (val: boolean) => void;
+  shrinkedSidebar: boolean;
 };
 
 export default compose<React.ComponentType>(

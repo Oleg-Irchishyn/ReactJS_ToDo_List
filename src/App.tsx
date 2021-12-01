@@ -19,13 +19,11 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
     const handleChangeActiveId = React.useCallback(() => {
       let hs: string | number = history.location.pathname.substr(7);
       let activeId = activeTodoList && activeTodoList.id;
-
       if (hs !== activeId) {
         history.push(`/lists/${activeId}`);
       } else if (hs === '') {
         history.push(`/`);
       }
-      console.log(hs);
     }, [history.location.pathname]);
 
     React.useEffect(() => {
@@ -39,6 +37,12 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
       handleChangeActiveId();
     }, [history.location.pathname]);
 
+    const [shrinkedSidebar, toggleShrinkedSidebar] = React.useState<boolean>(false);
+
+    const handleToggleShrinkedSidebar = (val: boolean) => {
+      toggleShrinkedSidebar(val);
+    };
+
     React.useEffect(() => {
       localStorage.setItem('activeTodoList', JSON.stringify(activeTodoList));
     }, [activeTodoList]);
@@ -46,13 +50,20 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
     if (!initialized || !isLoaded) {
       return <Preloader />;
     }
-
     return (
       <div className={cn(styles.main)}>
         <div className={cn('container')}>
           <div className={cn(styles.todo_content)}>
-            <Tasks />
-            <TasksItems />
+            <Tasks
+              //@ts-ignore
+              handleToggleShrinkedSidebar={handleToggleShrinkedSidebar}
+              shrinkedSidebar={shrinkedSidebar}
+            />
+            <TasksItems
+              //@ts-ignore
+              handleToggleShrinkedSidebar={handleToggleShrinkedSidebar}
+              shrinkedSidebar={shrinkedSidebar}
+            />
           </div>
         </div>
       </div>
@@ -74,6 +85,8 @@ type MapDispatchPropsType = {
 
 type ownProps = {
   history: RouteComponentProps['history'];
+  handleToggleShrinkedSidebar: (val: boolean) => void;
+  shrinkedSidebar: boolean;
 };
 
 export default compose<React.ComponentType>(

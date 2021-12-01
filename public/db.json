@@ -52,19 +52,19 @@
       "id": 2,
       "listId": 2,
       "text": "Learn project patterns",
-      "completed": true
+      "completed": false
     },
     {
       "id": 3,
       "listId": 2,
       "text": "ReactJS Hooks (useState, useReducer, useEffect и etc.)",
-      "completed": false
+      "completed": true
     },
     {
       "id": 4,
       "listId": 2,
       "text": "Redux (redux-observable, redux-saga)",
-      "completed": false
+      "completed": true
     },
     {
       "listId": 4,

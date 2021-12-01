@@ -1,6 +1,7 @@
 @import '../variables';
 
 .tasks {
+  position: relative;
   max-width: 25%;
   width: 100%;
   background: $bg-tasks;
@@ -19,6 +20,9 @@
     width: 0;
     background: transparent;
   }
+  @include md-devices {
+    max-width: 30%;
+  }
   &__item_wrapper {
     display: inline-flex;
     align-items: center;
@@ -28,8 +32,13 @@
     transition: 0.2s ease;
     padding: 0 12px 0 0;
     box-sizing: border-box;
+    max-width: 100%;
+
     &:nth-of-type(1) {
       margin: 0 0 26px 0;
+      @include md-devices {
+        margin: 0 0 16px 0;
+      }
     }
     &.active {
       background: $color-white;
@@ -41,6 +50,9 @@
     }
     &:nth-last-of-type(2) {
       margin: 0 0 26px 0;
+      @include md-devices {
+        margin: 0 0 16px 0;
+      }
     }
     &:hover {
       background: $color-white;
@@ -109,6 +121,10 @@
     border-radius: 4px;
     margin: 0;
 
+    @include md-devices {
+      padding: 12px;
+    }
+
     &::before {
       content: '';
       width: 12px;
@@ -128,6 +144,13 @@
     font-family: $font-secondary;
     text-decoration: none;
     background: transparent;
+    box-sizing: border-box;
+    max-width: 100%;
+    word-break: break-word;
+
+    @include md-devices {
+      padding: 15px 12px 15px 12px;
+    }
 
     i {
       width: 10px;
@@ -149,6 +172,12 @@
     font-size: 14px;
     font-weight: 500;
     margin: 0 0 0 3px;
+    @include md-devices {
+      margin: 0;
+      position: absolute;
+      top: calc(0px - 1%);
+      right: 0;
+    }
   }
 
   &__items_add_btn {
@@ -164,6 +193,42 @@
     b {
       font-size: 20px;
       font-weight: 500;
+    }
+  }
+
+  &__icon {
+    display: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    right: 0;
+    cursor: pointer;
+    i {
+      font-size: 24px;
+      color: $bg-btn;
+    }
+    @include sm-devices {
+      display: block;
+    }
+  }
+  &.large {
+    max-width: 80%;
+  }
+  &.small {
+    max-width: 17%;
+
+    .tasks__item {
+      p {
+        display: none;
+      }
+    }
+    .tasks__items_all {
+      font-size: 0;
+    }
+    .tasks__items_add_btn {
+      span {
+        display: none;
+      }
     }
   }
 }

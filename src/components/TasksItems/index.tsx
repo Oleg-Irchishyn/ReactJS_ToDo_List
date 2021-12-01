@@ -55,6 +55,8 @@ type MapDispatchPropsType = {};
 
 type ownProps = {
   listItem: SideBarTodoListsType;
+  handleToggleShrinkedSidebar: (val: boolean) => void;
+  shrinkedSidebar: boolean;
 };
 
 export default compose<React.ComponentType>(
