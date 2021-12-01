@@ -1,8 +1,8 @@
 {
-  "name": "reactjs-todo-list-app",
+  "name": "reactjs-todo-lists-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://reactjs-todo-list-app.herokuapp.com",
+  "homepage": "https://reactjs-todo-lists-app.herokuapp.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
