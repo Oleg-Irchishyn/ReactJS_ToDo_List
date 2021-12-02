@@ -39,11 +39,6 @@
       "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "name": "Swimming",
       "colorId": 8
-    },
-    {
-      "id": "37bfdeed-81be-4a19-8fd2-b3e9e0353aa6",
-      "name": "test task",
-      "colorId": 3
     }
   ],
   "tasks": [
@@ -92,7 +87,7 @@
     {
       "listId": 7,
       "text": "Created editing and deleting of todos",
-      "completed": true,
+      "completed": false,
       "id": 17
     },
     {

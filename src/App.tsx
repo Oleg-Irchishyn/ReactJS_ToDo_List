@@ -16,26 +16,12 @@ import { actions } from './redux/reducers/sidebar';
 
 const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ initializeApp, setActiveTodoList, initialized, isLoaded, activeTodoList, history }) => {
-    const handleChangeActiveId = React.useCallback(() => {
-      let hs: string | number = history.location.pathname.substr(7);
-      let activeId = activeTodoList && activeTodoList.id;
-      if (hs !== activeId) {
-        history.push(`/lists/${activeId}`);
-      } else if (hs === '') {
-        history.push(`/`);
-      }
-    }, [history.location.pathname]);
-
     React.useEffect(() => {
       initializeApp();
       if (history.location.pathname === '/') {
         setActiveTodoList('');
       }
     }, []);
-
-    React.useEffect(() => {
-      handleChangeActiveId();
-    }, [history.location.pathname]);
 
     const [shrinkedSidebar, toggleShrinkedSidebar] = React.useState<boolean>(false);
 

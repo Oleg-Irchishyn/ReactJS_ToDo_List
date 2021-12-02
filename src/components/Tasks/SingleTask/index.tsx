@@ -23,10 +23,11 @@ const SingleTask: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> 
 
     const handleDeleTodoList = (id: string | number) => {
       if (window.confirm(`Do you want to remove this list?`)) {
-        deleteSidebarTodoList(id);
         history.push(`/`);
         localStorage.clear();
-      } else return false;
+        deleteSidebarTodoList(id);
+        setActiveTodoList('');
+      }
     };
     return (
       <div
@@ -56,7 +57,7 @@ const mapStateToProps = (state: AppStateType) => ({
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   deleteSidebarTodoList: (id: string | number) => void;
-  setActiveTodoList: (obj: SideBarTodoListsType) => void;
+  setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
 };
 
 type ownProps = {
