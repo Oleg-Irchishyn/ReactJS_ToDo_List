@@ -1,4 +1,5 @@
 import React from 'react';
+//@ts-ignore
 import styles from '../../styles/components/Tasks.module.scss';
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';

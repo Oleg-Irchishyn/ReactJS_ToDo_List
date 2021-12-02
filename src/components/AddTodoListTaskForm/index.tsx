@@ -1,4 +1,5 @@
 import React from 'react';
+//@ts-ignore
 import styles from '../../styles/components/AddTodoListTaskForm.module.scss';
 import cn from 'classnames';
 import { connect } from 'react-redux';

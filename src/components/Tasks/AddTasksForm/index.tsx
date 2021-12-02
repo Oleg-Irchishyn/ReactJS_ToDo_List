@@ -1,5 +1,7 @@
 import React from 'react';
+//@ts-ignore
 import styles from '../../../styles/components/AddTasksForm.module.scss';
+//@ts-ignore
 import taskSstyles from '../../../styles/components/Tasks.module.scss';
 import cn from 'classnames';
 import { connect } from 'react-redux';
