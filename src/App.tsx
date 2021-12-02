@@ -1,5 +1,4 @@
 import React from 'react';
-//@ts-ignore
 import styles from './styles/components/App.module.scss';
 import { connect } from 'react-redux';
 import { compose } from 'redux';

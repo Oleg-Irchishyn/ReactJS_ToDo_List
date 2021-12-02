@@ -1,6 +1,5 @@
 import React from 'react';
 import { SideBarTodoListsType } from '../../../redux/types/types';
-//@ts-ignore
 import styles from '../../../styles/components/Tasks.module.scss';
 import cn from 'classnames';
 import { NavLink, withRouter } from 'react-router-dom';

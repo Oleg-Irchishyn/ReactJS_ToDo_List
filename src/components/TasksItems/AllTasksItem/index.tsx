@@ -1,9 +1,7 @@
 import React from 'react';
-//@ts-ignore
 import styles from '../../../styles/components/TasksItems.module.scss';
 import cn from 'classnames';
 import { SideBarTodoListsType } from '../../../redux/types/types';
-//@ts-ignore
 import editImg from '../../../assets/images/edit.svg';
 import { AddTodoListTaskForm } from '../../';
 import { AppStateType } from '../../../redux/store';

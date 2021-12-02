@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
-//@ts-ignore
 import styles from '../../styles/components/TasksItems.module.scss';
 import cn from 'classnames';
 import { AppStateType } from '../../redux/store';

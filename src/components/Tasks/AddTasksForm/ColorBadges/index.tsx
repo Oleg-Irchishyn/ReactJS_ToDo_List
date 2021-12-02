@@ -5,7 +5,6 @@ import { getSelectedTodoListColor } from '../../../../redux/selectors/sidebarSel
 import { AppStateType } from '../../../../redux/store';
 import { actions } from '../../../../redux/reducers/sidebar';
 import { ColorsType } from '../../../../redux/types/types';
-//@ts-ignore
 import styles from '../../../../styles/components/AddTasksForm.module.scss';
 import cn from 'classnames';
 
