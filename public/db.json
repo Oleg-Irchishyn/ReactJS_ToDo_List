@@ -39,11 +39,6 @@
       "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "name": "Swimming",
       "colorId": 8
-    },
-    {
-      "id": "39747a62-ded7-4982-91ba-ef3fe704a83c",
-      "name": "yo",
-      "colorId": 1
     }
   ],
   "tasks": [
@@ -141,12 +136,6 @@
       "id": "492018b0-cf8c-458a-8fc6-17e3fe946839",
       "listId": 3,
       "text": "Darrel's squirrel",
-      "completed": false
-    },
-    {
-      "id": "df4ae2fd-d45d-4041-8bf7-be0776332ca8",
-      "listId": "6fea5edd-34e9-491b-a779-44d3855d5f66",
-      "text": "yolo",
       "completed": false
     }
   ],
