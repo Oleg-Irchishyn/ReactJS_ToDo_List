@@ -45,7 +45,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "watch": "json-server --watch public/db.json --port 3001",
@@ -60,6 +60,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://localhost:3001/",
   "browserslist": {
     "production": [
       ">0.2%",

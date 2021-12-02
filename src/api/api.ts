@@ -3,7 +3,7 @@ import { SideBarTodoListsType, TasksType } from '../redux/types/types';
 
 const instance = axios.create({
   withCredentials: true,
-  baseURL: 'https://reactjs-todo-lists-app.herokuapp.com/api/',
+  baseURL: 'https://reactjs-todo-lists-app.herokuapp.com/api',
 });
 
 export const todoAPI = {
