@@ -10,18 +10,15 @@ import {
 } from '../../../redux/selectors/sidebarSelectors';
 import { AppStateType } from '../../../redux/store';
 import { ColorBadges } from '../../';
-import { ColorsType, SideBarTodoListsType } from '../../../redux/types/types';
+import { ColorsType } from '../../../redux/types/types';
 import { setNewTodoListItem } from '../../../redux/reducers/sidebar';
 import { v4 as uuidv4 } from 'uuid';
 import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createInput } from '../../common/FormControls';
 import { maxLengthCreator, required } from '../../../redux/utils/validators';
-import { actions as sbActions } from '../../../redux/reducers/sidebar';
-import { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router-dom';
 
 const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ colors, selectedTodoListColor, setNewTodoListItem, setActiveTodoList, history }) => {
+  ({ colors, selectedTodoListColor, setNewTodoListItem }) => {
     const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
     const showAddTaskFormPopup = () => {
@@ -54,9 +51,6 @@ const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
       const { id, name, colorId } = newTaskItem;
       setFormVisibility(false);
       setNewTodoListItem(id, name, colorId);
-      history.push(`/`);
-      localStorage.clear();
-      setActiveTodoList('');
     };
     return (
       <div className={cn(taskSstyles.tasks__items_form_wrapper)} ref={popupFormRef}>
@@ -116,18 +110,14 @@ const mapStateToProps = (state: AppStateType) => ({
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
   setNewTodoListItem: (id: string | number, name: string, colorId: string | number) => void;
-  setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
 };
 
 type ownProps = {
   item: ColorsType;
-  history: RouteComponentProps['history'];
 };
 
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setNewTodoListItem,
-    setActiveTodoList: sbActions.setActiveTodoList,
   }),
-  withRouter,
 )(AddTasksForm);
