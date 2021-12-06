@@ -17,9 +17,11 @@ import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createInput } from '../../common/FormControls';
 import { maxLengthCreator, required } from '../../../redux/utils/validators';
 import { actions as sbActions } from '../../../redux/reducers/sidebar';
+import { RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ colors, selectedTodoListColor, setNewTodoListItem, setActiveTodoList }) => {
+  ({ colors, selectedTodoListColor, setNewTodoListItem, setActiveTodoList, history }) => {
     const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
     const showAddTaskFormPopup = () => {
@@ -52,6 +54,7 @@ const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
       const { id, name, colorId } = newTaskItem;
       setFormVisibility(false);
       setNewTodoListItem(id, name, colorId);
+      history.push(`/`);
       localStorage.clear();
       setActiveTodoList('');
     };
@@ -118,6 +121,7 @@ type MapDispatchPropsType = {
 
 type ownProps = {
   item: ColorsType;
+  history: RouteComponentProps['history'];
 };
 
 export default compose<React.ComponentType>(
@@ -125,4 +129,5 @@ export default compose<React.ComponentType>(
     setNewTodoListItem,
     setActiveTodoList: sbActions.setActiveTodoList,
   }),
+  withRouter,
 )(AddTasksForm);
