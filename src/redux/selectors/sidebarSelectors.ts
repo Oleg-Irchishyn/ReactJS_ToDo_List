@@ -2,7 +2,9 @@ import { AppStateType } from './../store';
 
 export const getSidebarTodoList = (state: AppStateType) => {
   return state.sidebar.sidebarTodoList.map((item) => {
-    item.color = state.sidebar.colors.filter((color) => color.id === item.colorId)[0].hex;
+    const colorHex = state.sidebar.colors.filter((color) => color.id === item.colorId)[0].hex;
+    const colorName = state.sidebar.colors.filter((color) => color.id === item.colorId)[0].name;
+    colorHex ? (item.color = colorHex) : (item.color = colorName);
     return item;
   });
 };
