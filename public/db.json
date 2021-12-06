@@ -39,36 +39,6 @@
       "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "name": "Swimming",
       "colorId": 8
-    },
-    {
-      "id": "a94661be-4134-4795-92be-1a9cbc8bbfc6",
-      "name": "lady gaga",
-      "colorId": 6
-    },
-    {
-      "id": "c251e44c-ac47-40e6-b127-b0a0de79b579",
-      "name": "test",
-      "colorId": 5
-    },
-    {
-      "id": "c9d65a11-0549-4989-a21e-7a52f5ada882",
-      "name": "2222",
-      "colorId": 6
-    },
-    {
-      "id": "3de71368-8a46-465c-9341-84ed39f51e84",
-      "name": "66",
-      "colorId": 7
-    },
-    {
-      "id": "26ba0d66-dd56-4ff7-ad85-38f3c408d16e",
-      "name": "fa",
-      "colorId": 5
-    },
-    {
-      "id": "8539d1cd-e575-4e65-b009-49ad3c339716",
-      "name": "gag",
-      "colorId": 6
     }
   ],
   "tasks": [
@@ -166,90 +136,6 @@
       "id": "492018b0-cf8c-458a-8fc6-17e3fe946839",
       "listId": 3,
       "text": "Darrel's squirrel",
-      "completed": false
-    },
-    {
-      "id": "5c110813-d41b-42f7-853d-3bf1afea5dc9",
-      "listId": "a94661be-4134-4795-92be-1a9cbc8bbfc6",
-      "text": "radio gaga",
-      "completed": false
-    },
-    {
-      "id": "32ef0895-8238-4450-9251-64d4af7b2209",
-      "listId": "a94661be-4134-4795-92be-1a9cbc8bbfc6",
-      "text": "radio gugu",
-      "completed": false
-    },
-    {
-      "id": "b92444ab-d731-435a-800f-b58188ce29e1",
-      "listId": "c251e44c-ac47-40e6-b127-b0a0de79b579",
-      "text": "test123",
-      "completed": true
-    },
-    {
-      "id": "8a1daeb2-0f54-494c-8aa4-f16ee4c7417a",
-      "listId": "c251e44c-ac47-40e6-b127-b0a0de79b579",
-      "text": "test 2223",
-      "completed": true
-    },
-    {
-      "id": "30432525-8f4f-4820-9648-203f9020aae3",
-      "listId": "c9d65a11-0549-4989-a21e-7a52f5ada882",
-      "text": "2",
-      "completed": false
-    },
-    {
-      "id": "688dd879-0e85-40b0-93da-7d3fbc2404b4",
-      "listId": "c9d65a11-0549-4989-a21e-7a52f5ada882",
-      "text": "24",
-      "completed": false
-    },
-    {
-      "id": "12003143-f77c-406b-b043-6680f04d8dc6",
-      "listId": "c9d65a11-0549-4989-a21e-7a52f5ada882",
-      "text": "52",
-      "completed": false
-    },
-    {
-      "id": "481b4ddf-73e6-4f0b-9cad-fbe529fe4d5f",
-      "listId": "3de71368-8a46-465c-9341-84ed39f51e84",
-      "text": "666",
-      "completed": false
-    },
-    {
-      "id": "75d106d3-d925-44a1-8abc-6210d70685e1",
-      "listId": "3de71368-8a46-465c-9341-84ed39f51e84",
-      "text": "999",
-      "completed": false
-    },
-    {
-      "id": "c4c862aa-25a5-465a-94a1-4989da9a557b",
-      "listId": "26ba0d66-dd56-4ff7-ad85-38f3c408d16e",
-      "text": "11",
-      "completed": true
-    },
-    {
-      "id": "c35b6326-cd17-43b7-8052-2d4b68206f3b",
-      "listId": "26ba0d66-dd56-4ff7-ad85-38f3c408d16e",
-      "text": "24242",
-      "completed": true
-    },
-    {
-      "id": "7d935f0e-95c8-402e-935a-ce4278b86e23",
-      "listId": "8539d1cd-e575-4e65-b009-49ad3c339716",
-      "text": "2424",
-      "completed": false
-    },
-    {
-      "id": "fb5024c6-1d01-42b4-b888-3a44189cac5a",
-      "listId": "8539d1cd-e575-4e65-b009-49ad3c339716",
-      "text": "2525",
-      "completed": false
-    },
-    {
-      "id": "957a4725-fd2a-4aa3-9721-b8907dae207d",
-      "listId": "8539d1cd-e575-4e65-b009-49ad3c339716",
-      "text": "I control",
       "completed": false
     }
   ],
