@@ -18,10 +18,13 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React
   ({ initializeApp, setActiveTodoList, initialized, isLoaded, activeTodoList, history }) => {
     React.useEffect(() => {
       initializeApp();
+    }, [activeTodoList]);
+
+    React.useEffect(() => {
       if (history.location.pathname === '/') {
         setActiveTodoList('');
       }
-    }, []);
+    }, [history.location.pathname]);
 
     const [shrinkedSidebar, toggleShrinkedSidebar] = React.useState<boolean>(false);
 
