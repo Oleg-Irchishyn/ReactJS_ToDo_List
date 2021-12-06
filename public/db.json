@@ -39,6 +39,21 @@
       "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "name": "Swimming",
       "colorId": 8
+    },
+    {
+      "id": "0e1fc30c-73f6-4895-a5d3-f9d2b81cca58",
+      "name": "23",
+      "colorId": 5
+    },
+    {
+      "id": "a0e89d7d-528f-4fc7-a7a9-07bc05e4820f",
+      "name": "gaga",
+      "colorId": 4
+    },
+    {
+      "id": "a94661be-4134-4795-92be-1a9cbc8bbfc6",
+      "name": "lady gaga",
+      "colorId": 6
     }
   ],
   "tasks": [
@@ -136,6 +151,42 @@
       "id": "492018b0-cf8c-458a-8fc6-17e3fe946839",
       "listId": 3,
       "text": "Darrel's squirrel",
+      "completed": false
+    },
+    {
+      "id": "dc7cb659-908f-4a9d-9ec6-f30e60028d32",
+      "listId": "0e1fc30c-73f6-4895-a5d3-f9d2b81cca58",
+      "text": "yoyo",
+      "completed": false
+    },
+    {
+      "id": "df0028e2-3951-42c6-97ba-d381ba3bcbb8",
+      "listId": "0e1fc30c-73f6-4895-a5d3-f9d2b81cca58",
+      "text": "yoyo2",
+      "completed": false
+    },
+    {
+      "id": "9423bf62-b104-422b-a3b9-d0e3afe839ba",
+      "listId": "0e1fc30c-73f6-4895-a5d3-f9d2b81cca58",
+      "text": "yoyo3",
+      "completed": false
+    },
+    {
+      "id": "84e8e965-1aaa-4127-b56f-fc89b459e29d",
+      "listId": "a0e89d7d-528f-4fc7-a7a9-07bc05e4820f",
+      "text": "144",
+      "completed": false
+    },
+    {
+      "id": "5c110813-d41b-42f7-853d-3bf1afea5dc9",
+      "listId": "a94661be-4134-4795-92be-1a9cbc8bbfc6",
+      "text": "radio gaga",
+      "completed": false
+    },
+    {
+      "id": "32ef0895-8238-4450-9251-64d4af7b2209",
+      "listId": "a94661be-4134-4795-92be-1a9cbc8bbfc6",
+      "text": "radio gugu",
       "completed": false
     }
   ],
