@@ -8,20 +8,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createInput } from '../common/FormControls';
 import { maxLengthCreator, required } from '../../redux/utils/validators';
-import { setNewTodoListTaskSuccess, getAllTodoListTasks } from '../../redux/reducers/tasks';
+import { setNewTodoListTaskSuccess } from '../../redux/reducers/tasks';
 import { getAllSidebarTodoList } from '../../redux/reducers/sidebar';
 import { SideBarTodoListsType } from '../../redux/types/types';
 import { actions as sbActions } from '../../redux/reducers/sidebar';
 
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
-    ({
-      setNewTodoListTaskSuccess,
-      getAllTodoListTasks,
-      getAllSidebarTodoList,
-      setActiveTodoList,
-      activeListId,
-    }) => {
+    ({ setNewTodoListTaskSuccess, getAllSidebarTodoList, setActiveTodoList, activeListId }) => {
       const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
       const showAddTaskFormPopup = () => {
@@ -62,9 +56,11 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         const { id, listId, text, completed } = newTaskItem;
         setFormVisibility(false);
         setNewTodoListTaskSuccess(id, listId, text, completed);
-        // getAllTodoListTasks();
         getAllSidebarTodoList();
-        setActiveTodoList(activeListId);
+        if (listId === activeListId.id) {
+          setActiveTodoList(activeListId);
+          console.log('yes');
+        }
       };
       return (
         <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
@@ -134,7 +130,6 @@ type MapDispatchPropsType = {
     text: string | number,
     completed: boolean,
   ) => void;
-  getAllTodoListTasks: () => void;
   getAllSidebarTodoList: () => void;
   setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
 };
@@ -146,7 +141,6 @@ type ownProps = {
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setNewTodoListTaskSuccess,
-    getAllTodoListTasks,
     getAllSidebarTodoList,
     setActiveTodoList: sbActions.setActiveTodoList,
   }),
