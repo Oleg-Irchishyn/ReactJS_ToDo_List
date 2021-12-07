@@ -64,10 +64,9 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         setFormVisibility(false);
         setNewTodoListTaskSuccess(id, listId, text, completed);
         getAllSidebarTodoList();
-        if (listId === activeListId.id) {
-          setActiveTodoList('');
-          history.push(`/`);
-        }
+        history.push(`/`);
+        localStorage.clear();
+        setActiveTodoList('');
       };
       return (
         <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
