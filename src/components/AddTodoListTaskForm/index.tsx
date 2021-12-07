@@ -8,65 +8,73 @@ import { v4 as uuidv4 } from 'uuid';
 import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createInput } from '../common/FormControls';
 import { maxLengthCreator, required } from '../../redux/utils/validators';
-import { setNewTodoListTaskSuccess } from '../../redux/reducers/tasks';
+import { setNewTodoListTaskSuccess, getAllTodoListTasks } from '../../redux/reducers/tasks';
+import { getAllSidebarTodoList } from '../../redux/reducers/sidebar';
 import { SideBarTodoListsType } from '../../redux/types/types';
 
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
-  React.memo(({ setNewTodoListTaskSuccess, activeListId }) => {
-    const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
+  React.memo(
+    ({ setNewTodoListTaskSuccess, getAllTodoListTasks, getAllSidebarTodoList, activeListId }) => {
+      const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
-    const showAddTaskFormPopup = () => {
-      setFormVisibility(true);
-    };
+      const showAddTaskFormPopup = () => {
+        setFormVisibility(true);
+      };
 
-    const onCancelSubmit = () => {
-      setFormVisibility(false);
-    };
-
-    const dropdownFormRef = React.useRef<HTMLDivElement>(null);
-
-    const handleTaskFormOutsideClick = React.useCallback((e: any) => {
-      const path = e.path || (e.composedPath && e.composedPath());
-      if (!path.includes(dropdownFormRef.current)) {
+      const onCancelSubmit = () => {
         setFormVisibility(false);
-      }
-    }, []);
-
-    React.useEffect(() => {
-      document.body.addEventListener('click', handleTaskFormOutsideClick);
-      return () => {
-        document.body.removeEventListener('click', handleTaskFormOutsideClick);
-      };
-    }, [handleTaskFormOutsideClick]);
-
-    const onSubmitForm = (
-      values: AddTodoListTaskFormValuesType,
-      dispatch: (T: FormAction) => void,
-    ) => {
-      const newTaskItem = {
-        id: uuidv4(),
-        listId: activeListId && activeListId?.id,
-        text: values.text,
-        completed: false,
       };
 
-      const { id, listId, text, completed } = newTaskItem;
-      setFormVisibility(false);
-      setNewTodoListTaskSuccess(id, listId, text, completed);
-    };
-    return (
-      <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
-        <div className={cn(styles.show_form_btn)} onClick={showAddTaskFormPopup}>
-          {!visibleForm ? <b>+</b> : <b>-</b>} <span>Add New Task</span>
-        </div>
-        {visibleForm && (
-          <div className={cn(styles.add_todo_list_task_form)}>
-            <AddTodoListTaskFormFormRedux onCancelSubmit={onCancelSubmit} onSubmit={onSubmitForm} />
+      const dropdownFormRef = React.useRef<HTMLDivElement>(null);
+
+      const handleTaskFormOutsideClick = React.useCallback((e: any) => {
+        const path = e.path || (e.composedPath && e.composedPath());
+        if (!path.includes(dropdownFormRef.current)) {
+          setFormVisibility(false);
+        }
+      }, []);
+
+      React.useEffect(() => {
+        document.body.addEventListener('click', handleTaskFormOutsideClick);
+        return () => {
+          document.body.removeEventListener('click', handleTaskFormOutsideClick);
+        };
+      }, [handleTaskFormOutsideClick]);
+
+      const onSubmitForm = (
+        values: AddTodoListTaskFormValuesType,
+        dispatch: (T: FormAction) => void,
+      ) => {
+        const newTaskItem = {
+          id: uuidv4(),
+          listId: activeListId && activeListId?.id,
+          text: values.text,
+          completed: false,
+        };
+
+        const { id, listId, text, completed } = newTaskItem;
+        setFormVisibility(false);
+        setNewTodoListTaskSuccess(id, listId, text, completed);
+        getAllTodoListTasks();
+        getAllSidebarTodoList();
+      };
+      return (
+        <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
+          <div className={cn(styles.show_form_btn)} onClick={showAddTaskFormPopup}>
+            {!visibleForm ? <b>+</b> : <b>-</b>} <span>Add New Task</span>
           </div>
-        )}
-      </div>
-    );
-  });
+          {visibleForm && (
+            <div className={cn(styles.add_todo_list_task_form)}>
+              <AddTodoListTaskFormFormRedux
+                onCancelSubmit={onCancelSubmit}
+                onSubmit={onSubmitForm}
+              />
+            </div>
+          )}
+        </div>
+      );
+    },
+  );
 
 const maxLength20 = maxLengthCreator(20);
 
@@ -118,6 +126,8 @@ type MapDispatchPropsType = {
     text: string | number,
     completed: boolean,
   ) => void;
+  getAllTodoListTasks: () => void;
+  getAllSidebarTodoList: () => void;
 };
 
 type ownProps = {
@@ -127,5 +137,7 @@ type ownProps = {
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setNewTodoListTaskSuccess,
+    getAllTodoListTasks,
+    getAllSidebarTodoList,
   }),
 )(AddTodoListTaskForm);
