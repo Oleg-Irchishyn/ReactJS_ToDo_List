@@ -11,10 +11,17 @@ import { maxLengthCreator, required } from '../../redux/utils/validators';
 import { setNewTodoListTaskSuccess, getAllTodoListTasks } from '../../redux/reducers/tasks';
 import { getAllSidebarTodoList } from '../../redux/reducers/sidebar';
 import { SideBarTodoListsType } from '../../redux/types/types';
+import { actions as sbActions } from '../../redux/reducers/sidebar';
 
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
-    ({ setNewTodoListTaskSuccess, getAllTodoListTasks, getAllSidebarTodoList, activeListId }) => {
+    ({
+      setNewTodoListTaskSuccess,
+      getAllTodoListTasks,
+      getAllSidebarTodoList,
+      setActiveTodoList,
+      activeListId,
+    }) => {
       const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
       const showAddTaskFormPopup = () => {
@@ -55,8 +62,9 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         const { id, listId, text, completed } = newTaskItem;
         setFormVisibility(false);
         setNewTodoListTaskSuccess(id, listId, text, completed);
-        getAllTodoListTasks();
+        // getAllTodoListTasks();
         getAllSidebarTodoList();
+        setActiveTodoList(activeListId);
       };
       return (
         <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
@@ -128,6 +136,7 @@ type MapDispatchPropsType = {
   ) => void;
   getAllTodoListTasks: () => void;
   getAllSidebarTodoList: () => void;
+  setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
 };
 
 type ownProps = {
@@ -139,5 +148,6 @@ export default compose<React.ComponentType>(
     setNewTodoListTaskSuccess,
     getAllTodoListTasks,
     getAllSidebarTodoList,
+    setActiveTodoList: sbActions.setActiveTodoList,
   }),
 )(AddTodoListTaskForm);
