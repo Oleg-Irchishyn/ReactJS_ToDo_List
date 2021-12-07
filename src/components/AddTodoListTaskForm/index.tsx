@@ -65,10 +65,8 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         setNewTodoListTaskSuccess(id, listId, text, completed);
         getAllSidebarTodoList();
         if (listId === activeListId.id) {
-          localStorage.clear();
-          setActiveTodoList(activeListId);
-          history.push(`lists/${activeListId.id}`);
-          console.log('yes');
+          setActiveTodoList('');
+          history.push(`/`);
         }
       };
       return (
