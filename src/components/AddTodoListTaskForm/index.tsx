@@ -12,10 +12,17 @@ import { setNewTodoListTaskSuccess } from '../../redux/reducers/tasks';
 import { getAllSidebarTodoList } from '../../redux/reducers/sidebar';
 import { SideBarTodoListsType } from '../../redux/types/types';
 import { actions as sbActions } from '../../redux/reducers/sidebar';
+import { RouteComponentProps, withRouter } from 'react-router';
 
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
-    ({ setNewTodoListTaskSuccess, getAllSidebarTodoList, setActiveTodoList, activeListId }) => {
+    ({
+      setNewTodoListTaskSuccess,
+      getAllSidebarTodoList,
+      setActiveTodoList,
+      activeListId,
+      history,
+    }) => {
       const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
       const showAddTaskFormPopup = () => {
@@ -58,7 +65,9 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         setNewTodoListTaskSuccess(id, listId, text, completed);
         getAllSidebarTodoList();
         if (listId === activeListId.id) {
+          localStorage.clear();
           setActiveTodoList(activeListId);
+          history.push(`lists/${activeListId.id}`);
           console.log('yes');
         }
       };
@@ -136,6 +145,7 @@ type MapDispatchPropsType = {
 
 type ownProps = {
   activeListId: SideBarTodoListsType;
+  history: RouteComponentProps['history'];
 };
 
 export default compose<React.ComponentType>(
@@ -144,4 +154,5 @@ export default compose<React.ComponentType>(
     getAllSidebarTodoList,
     setActiveTodoList: sbActions.setActiveTodoList,
   }),
+  withRouter,
 )(AddTodoListTaskForm);
