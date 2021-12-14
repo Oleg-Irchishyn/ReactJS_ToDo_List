@@ -13,7 +13,6 @@ import { SideBarTodoListsType } from '../../redux/types/types';
 import { initializeApp } from '../../redux/reducers/app';
 
 var activeElem;
-var event;
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
     ({
@@ -23,16 +22,15 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
     }) => {
       const handleActiveElemClick = React.useCallback(() => {
         activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__3wSoV');
+        function triggerClick(activeElement: any) {
+          activeElement.click()
+        }
         activeElem.forEach(function (elem: any, index) {
           if (elem.classList.contains('Tasks_active__uBwpm')) {
-            event = new MouseEvent('dblclick', {
-              'view': window,
-              'bubbles': true,
-              'cancelable': true
-            });
-            elem.dispatchEvent(event);
-            if (event) {
-             console.log('clicked')
+            elem.click();
+            setTimeout(() =>  triggerClick, 500);
+            if (elem.click) {
+             console.log('active element clicked')
             }
           }
         });
