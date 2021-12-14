@@ -14,6 +14,7 @@ import { SideBarTodoListsType } from '../../redux/types/types';
 import { actions as sbActions } from '../../redux/reducers/sidebar';
 import { RouteComponentProps, withRouter } from 'react-router';
 
+var activeElem;
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
     ({
@@ -23,6 +24,20 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
       activeListId,
       history,
     }) => {
+      const handleActiveElemClick = React.useCallback(() => {
+        activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__1gXOY');
+        activeElem.forEach(function (elem: any, index) {
+          if (elem.classList.contains('Tasks_active__3ErJC')) {
+            if (elem.onclick) {
+              elem.onclick();
+              console.log('clicked')
+            } else if (elem.click) {
+              elem.click();
+            }
+          }
+        });
+      }, [activeListId]);
+
       const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
       const showAddTaskFormPopup = () => {
@@ -64,9 +79,7 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         setFormVisibility(false);
         setNewTodoListTaskSuccess(id, listId, text, completed);
         getAllSidebarTodoList();
-        history.push(`/`);
-        localStorage.clear();
-        setActiveTodoList('');
+        handleActiveElemClick();
       };
       return (
         <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
