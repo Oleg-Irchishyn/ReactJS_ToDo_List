@@ -28,11 +28,9 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__1gXOY');
         activeElem.forEach(function (elem: any, index) {
           if (elem.classList.contains('Tasks_active__3ErJC')) {
-            if (elem.onclick) {
-              elem.onclick();
+            elem.click()
+            if (elem.click) {
               console.log('clicked')
-            } else if (elem.click) {
-              elem.click();
             }
           }
         });
