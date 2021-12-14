@@ -22,9 +22,9 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
       activeListId,
     }) => {
       const handleActiveElemClick = React.useCallback(() => {
-        activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__1gXOY');
+        activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__3wSoV');
         activeElem.forEach(function (elem: any, index) {
-          if (elem.classList.contains('Tasks_active__3ErJC')) {
+          if (elem.classList.contains('Tasks_active__uBwpm')) {
             event = new MouseEvent('dblclick', {
               'view': window,
               'bubbles': true,
