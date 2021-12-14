@@ -29,9 +29,6 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
           if (elem.classList.contains('Tasks_active__uBwpm')) {
             elem.click();
             setTimeout(() =>  triggerClick, 500);
-            if (elem.click) {
-             console.log('active element clicked')
-            }
           }
         });
       }, [activeListId]);

@@ -39,6 +39,11 @@
       "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "name": "Swimming",
       "colorId": 8
+    },
+    {
+      "id": "534ee4ce-5f63-4e2f-ae91-57e5e2241370",
+      "name": "test",
+      "colorId": 3
     }
   ],
   "tasks": [
@@ -148,6 +153,12 @@
       "id": "e20f7ce2-6bf3-4b3f-a3c4-ac81fac84c90",
       "listId": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "text": "3",
+      "completed": false
+    },
+    {
+      "id": "8f8584db-d6a3-4602-b6d7-e16ebe9bf744",
+      "listId": "534ee4ce-5f63-4e2f-ae91-57e5e2241370",
+      "text": "123",
       "completed": false
     }
   ],
