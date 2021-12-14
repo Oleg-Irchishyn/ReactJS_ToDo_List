@@ -9,28 +9,29 @@ import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createInput } from '../common/FormControls';
 import { maxLengthCreator, required } from '../../redux/utils/validators';
 import { setNewTodoListTaskSuccess } from '../../redux/reducers/tasks';
-import { getAllSidebarTodoList } from '../../redux/reducers/sidebar';
 import { SideBarTodoListsType } from '../../redux/types/types';
-import { actions as sbActions } from '../../redux/reducers/sidebar';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { initializeApp } from '../../redux/reducers/app';
 
 var activeElem;
+var event;
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
     ({
       setNewTodoListTaskSuccess,
-      getAllSidebarTodoList,
-      setActiveTodoList,
+      initializeApp,
       activeListId,
-      history,
     }) => {
       const handleActiveElemClick = React.useCallback(() => {
         activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__1gXOY');
         activeElem.forEach(function (elem: any, index) {
           if (elem.classList.contains('Tasks_active__3ErJC')) {
-            elem.click()
-            setTimeout(() => elem.click(), 100);
-            if (elem.click) {
+            event = new MouseEvent('dblclick', {
+              'view': window,
+              'bubbles': true,
+              'cancelable': true
+            });
+            elem.dispatchEvent(event);
+            if (event) {
              console.log('clicked')
             }
           }
@@ -77,7 +78,7 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         const { id, listId, text, completed } = newTaskItem;
         setFormVisibility(false);
         setNewTodoListTaskSuccess(id, listId, text, completed);
-        getAllSidebarTodoList();
+        initializeApp();
         handleActiveElemClick();
       };
       return (
@@ -148,20 +149,16 @@ type MapDispatchPropsType = {
     text: string | number,
     completed: boolean,
   ) => void;
-  getAllSidebarTodoList: () => void;
-  setActiveTodoList: (obj: SideBarTodoListsType | '') => void;
+  initializeApp: () => void;
 };
 
 type ownProps = {
   activeListId: SideBarTodoListsType;
-  history: RouteComponentProps['history'];
 };
 
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setNewTodoListTaskSuccess,
-    getAllSidebarTodoList,
-    setActiveTodoList: sbActions.setActiveTodoList,
+    initializeApp,
   }),
-  withRouter,
 )(AddTodoListTaskForm);

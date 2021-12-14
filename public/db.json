@@ -39,21 +39,6 @@
       "id": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "name": "Swimming",
       "colorId": 8
-    },
-    {
-      "id": "0ff1d60b-737e-492a-b518-82754eb70a63",
-      "name": "2",
-      "colorId": 5
-    },
-    {
-      "id": "5b994879-ea34-42fe-9757-f58c1b16cda9",
-      "name": "2",
-      "colorId": 4
-    },
-    {
-      "id": "7077c40f-9415-4226-a090-cd30ef8d7d3c",
-      "name": "24",
-      "colorId": 6
     }
   ],
   "tasks": [
@@ -163,24 +148,6 @@
       "id": "e20f7ce2-6bf3-4b3f-a3c4-ac81fac84c90",
       "listId": "f91d7080-d040-4b82-b5ba-eae1b726bbac",
       "text": "3",
-      "completed": false
-    },
-    {
-      "id": "9ce2399f-a225-4b90-a729-da2dbf7919e1",
-      "listId": "0ff1d60b-737e-492a-b518-82754eb70a63",
-      "text": "2",
-      "completed": false
-    },
-    {
-      "id": "f56bc5f8-adf5-478f-b120-97e32f9396e9",
-      "listId": "5b994879-ea34-42fe-9757-f58c1b16cda9",
-      "text": "13",
-      "completed": false
-    },
-    {
-      "id": "09838363-d877-44b3-8504-5d79262682ca",
-      "listId": "7077c40f-9415-4226-a090-cd30ef8d7d3c",
-      "text": "2",
       "completed": false
     }
   ],
