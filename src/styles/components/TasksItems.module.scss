@@ -204,6 +204,16 @@
         transition: 0.2s ease;
         box-sizing: border-box;
         cursor: pointer;
+        @include sm-devices {
+          right: calc(0% + 17px);
+        }
+        @media (min-width: 768px) {
+          width: 18px;
+          height: 18px;
+          padding: 0;
+          top: calc(0% + 14px);
+      
+        }
         @media (min-width: 992px) {
           &:hover {
             transform: rotate(360deg) scale(1.1);
@@ -228,6 +238,10 @@
         transition: 0.2s ease;
         cursor: pointer;
         box-sizing: border-box;
+        @media (min-width: 768px) {
+          padding: 10px;
+          top: calc(0% + 14px);
+        }
         @media (min-width: 992px) {
           &:hover {
             transform: rotate(180deg) scale(1.1);
