@@ -64,7 +64,7 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         dispatch: (T: FormAction) => void,
       ) => {
         const newTaskItem = {
-          id: uuidv4(),
+          id: Number(uuidv4()),
           listId: activeListId && activeListId?.id,
           text: values.text,
           completed: false,

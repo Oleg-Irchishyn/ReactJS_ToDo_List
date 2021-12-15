@@ -21,15 +21,15 @@ const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = Rea
     history
   }) => {
     React.useEffect(() => {
-      const listId = history.location.pathname.substr(7);
+      const listId = history.location.pathname.substring(7);
      if(sidebarTodoList) {
        const list =  sidebarTodoList && sidebarTodoList.find(list => list.id === Number(listId))
-       if(list !== undefined) {
+       if(list) {
        setActiveTodoList(list)
        }
      }
 
-    },[activeTodoList, history.location.pathname])
+    },[history.location.pathname])
     return (
       <div
         className={cn(styles.tasks, {
