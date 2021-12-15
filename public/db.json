@@ -44,6 +44,11 @@
       "id": "534ee4ce-5f63-4e2f-ae91-57e5e2241370",
       "name": "test",
       "colorId": 3
+    },
+    {
+      "id": "48b36dd4-6be0-4324-936f-63f7aeec863b",
+      "name": "yoyo",
+      "colorId": 4
     }
   ],
   "tasks": [
@@ -159,6 +164,12 @@
       "id": "8f8584db-d6a3-4602-b6d7-e16ebe9bf744",
       "listId": "534ee4ce-5f63-4e2f-ae91-57e5e2241370",
       "text": "123",
+      "completed": false
+    },
+    {
+      "id": "5bf0a225-e250-4fef-9b69-051c687aa3e8",
+      "listId": "48b36dd4-6be0-4324-936f-63f7aeec863b",
+      "text": "13",
       "completed": false
     }
   ],

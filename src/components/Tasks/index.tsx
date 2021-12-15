@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from '../../styles/components/Tasks.module.scss';
 import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { RouteComponentProps } from 'react-router-dom';
 import { getActiveTodoList, getSidebarTodoList } from '../../redux/selectors/sidebarSelectors';
 import { AppStateType } from '../../redux/store';
 import { SingleTask, AddTasksForm } from '../';
@@ -17,7 +18,18 @@ const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = Rea
     activeTodoList,
     handleToggleShrinkedSidebar,
     shrinkedSidebar,
+    history
   }) => {
+    React.useEffect(() => {
+      const listId = history.location.pathname.substr(7);
+     if(sidebarTodoList) {
+       const list =  sidebarTodoList && sidebarTodoList.find(list => list.id === Number(listId))
+       if(list !== undefined) {
+       setActiveTodoList(list)
+       }
+     }
+
+    },[activeTodoList, history.location.pathname])
     return (
       <div
         className={cn(styles.tasks, {
@@ -67,10 +79,12 @@ type ownProps = {
   elem: SideBarTodoListsType;
   handleToggleShrinkedSidebar: (val: boolean) => void;
   shrinkedSidebar: boolean;
+  history: RouteComponentProps['history'];
 };
 
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setActiveTodoList: actions.setActiveTodoList,
   }),
+  withRouter,
 )(Tasks);
