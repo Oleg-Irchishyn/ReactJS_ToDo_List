@@ -2,7 +2,7 @@ import { todoAPI } from './../../api/api';
 import { FormAction } from 'redux-form';
 import { BaseThunkType, InferActionsTypes } from '../store';
 import { TasksType } from '../types/types';
-import { actions as sbActions } from './sidebar';
+import { actions as sbActions, getAllSidebarTodoList } from './sidebar';
 
 const SET_TODO_LIST_TASKS = 'todoApp/tasks/SET_TODO_LIST_TASKS';
 const ADD_NEW_TODO_LIST_TASKS = 'todoApp/tasks/ADD_NEW_TODO_LIST_TASKS';
@@ -118,6 +118,7 @@ export const setNewTodoListTaskName =
       await todoAPI.renameTodoListTask(id, newVal);
       dispatch(actions.changeTodoListTaskName(id, newVal));
       dispatch(sbActions.changeActiveTodoListTaskName(id, newVal));
+      getAllSidebarTodoList();
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);
     } finally {
@@ -132,6 +133,7 @@ export const deleteTodoListTask =
       await todoAPI.removeTodoListTask(id);
       dispatch(actions.deleteTodoListTaskItem(id));
       dispatch(sbActions.deleteActiveTodoListTask(id));
+      getAllSidebarTodoList();
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);
     } finally {
@@ -146,6 +148,7 @@ export const toggleTaskCompletion =
       await todoAPI.toggleTodoListTaskCompletion(id, listId, completed);
       dispatch(actions.changeTodoListTaskCompletion(id, completed));
       dispatch(sbActions.changeActiveTodoListTaskCompletion(id, completed));
+      getAllSidebarTodoList();
     } catch (err) {
       throw new Error(`Promise has not been resolved properly`);
     } finally {

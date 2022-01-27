@@ -99,7 +99,7 @@
       "id": "95871b52-4c49-488e-a639-5d34c42f2a8d",
       "listId": 3,
       "text": "Stranger Things",
-      "completed": false
+      "completed": true
     },
     {
       "id": "4d8c5482-51fc-46af-a099-988397da678b",
@@ -118,12 +118,6 @@
       "listId": 5,
       "text": "Buy a waffle cake",
       "completed": false
-    },
-    {
-      "id": "2ac78734-0244-4b8b-83fb-17786b97f36c",
-      "listId": 1,
-      "text": "chicken soup 2",
-      "completed": true
     },
     {
       "id": "b148eca1-65fe-4a3f-b5f0-ba517f2b242b",
