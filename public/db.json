@@ -102,12 +102,6 @@
       "completed": true
     },
     {
-      "id": "4d8c5482-51fc-46af-a099-988397da678b",
-      "listId": 1,
-      "text": "Chicken soup",
-      "completed": true
-    },
-    {
       "id": "ff107594-d72b-49fa-9835-6db33effca35",
       "listId": 1,
       "text": "Sour Cream",
@@ -156,9 +150,15 @@
       "completed": false
     },
     {
-      "id": 21,
-      "listId": 9,
-      "text": "13",
+      "id": 22,
+      "listId": 1,
+      "text": "new task",
+      "completed": false
+    },
+    {
+      "id": 23,
+      "listId": 1,
+      "text": "Chicken Soup",
       "completed": false
     }
   ],

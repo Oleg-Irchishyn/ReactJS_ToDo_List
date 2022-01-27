@@ -13,6 +13,7 @@ import {
   deleteTodoListTask,
   toggleTaskCompletion,
 } from '../../../redux/reducers/tasks';
+import { initializeApp } from '../../../redux/reducers/app';
 import { NavLink } from 'react-router-dom';
 
 const AllTasksItem: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = ({
@@ -22,6 +23,7 @@ const AllTasksItem: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
   changeTodoListItemName,
   toggleTaskCompletion,
   setActiveTodoList,
+  initializeApp,
 }) => {
   const titleStyle = {
     color: listItem && listItem.color,
@@ -55,12 +57,14 @@ const AllTasksItem: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
     const newTaskValue = window.prompt(`Task's Name`, (newVal = String(newVal)));
     if (newTaskValue) {
       setNewTodoListTaskName(id, newTaskValue);
+      initializeApp();
     }
   };
 
   const onDeleteTaskItem = (id: string | number) => {
     if (window.confirm(`Do you want to remove this task?`)) {
       deleteTodoListTask(id);
+      initializeApp();
     } else return false;
   };
 
@@ -69,6 +73,15 @@ const AllTasksItem: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
     if (newTodoListName) {
       changeTodoListItemName(id, newTodoListName);
     }
+  };
+
+  const onToggleTaskCompletion = (
+    id: string | number,
+    listId: string | number | null,
+    completed: boolean,
+  ) => {
+    toggleTaskCompletion(id, listId, completed);
+    initializeApp();
   };
 
   return (
@@ -115,7 +128,7 @@ const AllTasksItem: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
                     id={`task - ${obj.id}`}
                     type="checkbox"
                     checked={obj.completed}
-                    onChange={() => toggleTaskCompletion(obj.id, obj.listId, !obj.completed)}
+                    onChange={() => onToggleTaskCompletion(obj.id, obj.listId, !obj.completed)}
                   />
                   <label htmlFor={`task - ${obj.id}`}>{obj.text}</label>
                 </div>
@@ -150,6 +163,7 @@ type MapDispatchPropsType = {
     completed: boolean,
   ) => void;
   setActiveTodoList: (obj: SideBarTodoListsType) => void;
+  initializeApp: () => void;
 };
 
 type ownProps = {
@@ -163,5 +177,6 @@ export default compose<React.ComponentType>(
     changeTodoListItemName,
     toggleTaskCompletion,
     setActiveTodoList: sBactions.setActiveTodoList,
+    initializeApp,
   }),
 )(AllTasksItem);
