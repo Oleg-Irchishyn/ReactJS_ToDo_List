@@ -225,7 +225,7 @@ export const getAllTodoListColors = (): ThunkType => async (dispatch) => {
     let data = await todoAPI.getTodoListColors();
     dispatch(actions.setTodoListColors(data));
   } catch (err) {
-    throw new Error(`Promise has not been resolved properly`);
+    getAllSidebarTodoList();
   } finally {
     dispatch(actions.isLoadedSuccess());
   }

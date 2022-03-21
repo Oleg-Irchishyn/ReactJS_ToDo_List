@@ -44,6 +44,11 @@
       "id": 9,
       "name": "test",
       "colorId": 4
+    },
+    {
+      "id": 10,
+      "name": "test task 2",
+      "colorId": 7
     }
   ],
   "tasks": [
@@ -159,6 +164,24 @@
       "id": 23,
       "listId": 1,
       "text": "Chicken Soup",
+      "completed": false
+    },
+    {
+      "id": 24,
+      "listId": 9,
+      "text": "test task",
+      "completed": false
+    },
+    {
+      "id": 25,
+      "listId": 10,
+      "text": "123",
+      "completed": false
+    },
+    {
+      "id": 26,
+      "listId": 10,
+      "text": "233",
       "completed": false
     }
   ],
