@@ -275,4 +275,6 @@ export type initialStateType = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsTypes | FormAction>;
 
+/* for test commit */
+
 export default appReducer;
