@@ -7,9 +7,6 @@
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@svgr/webpack": "5.5.0",
-    "@testing-library/jest-dom": "^5.15.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.24",
     "@types/json-server": "^0.14.4",
     "@types/node": "^12.20.37",
@@ -57,8 +54,6 @@
     "html-webpack-plugin": "4.5.0",
     "http-proxy-middleware": "^2.0.1",
     "identity-obj-proxy": "3.0.0",
-    "jest": "26.6.0",
-    "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.1",
     "json-server": "^0.16.3",
@@ -81,6 +76,7 @@
     "react-redux": "^7.2.6",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.3.0",
+    "react-scripts": "^5.0.1",
     "react-slick": "^0.28.1",
     "redux-form": "^8.3.8",
     "reselect": "^4.1.5",
@@ -128,7 +124,13 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "jest": "^26.6.0",
+    "jest-circus": "^26.6.0"
+  },
   "jest": {
     "roots": [
       "<rootDir>/src"
@@ -148,7 +150,7 @@
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
-    "testRunner": "D:\\My_projects\\ReactJS_ToDo_List\\node_modules\\jest-circus\\runner.js",
+    "testRunner": "<rootDir>/node_modules/jest-circus/runner.js",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",

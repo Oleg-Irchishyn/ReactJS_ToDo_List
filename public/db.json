@@ -183,6 +183,12 @@
       "listId": 10,
       "text": "233",
       "completed": false
+    },
+    {
+      "id": 27,
+      "listId": 1,
+      "text": "Cookies",
+      "completed": true
     }
   ],
   "colors": [
