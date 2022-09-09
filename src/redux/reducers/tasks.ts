@@ -14,7 +14,7 @@ let initialState = {
   todoListTasks: [] as Array<TasksType>,
 };
 
-const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
+const tasksReducer = (state = initialState, action: ActionsTypes): initialStateType => {
   switch (action.type) {
     case SET_TODO_LIST_TASKS: {
       return {
@@ -157,4 +157,4 @@ export type initialStateType = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof actions>;
 type ThunkType = BaseThunkType<ActionsTypes | FormAction>;
 
-export default appReducer;
+export default tasksReducer;

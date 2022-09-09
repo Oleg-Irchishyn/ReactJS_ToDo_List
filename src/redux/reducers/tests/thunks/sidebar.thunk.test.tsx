@@ -1,5 +1,5 @@
-import { todoAPI } from '../../../api/api';
-import { ColorsType, SideBarTodoListsType } from '../../types/types';
+import { todoAPI } from '../../../../api/api';
+import { ColorsType, SideBarTodoListsType } from '../../../types/types';
 import {
   getAllSidebarTodoList,
   getAllTodoListColors,
@@ -7,8 +7,8 @@ import {
   changeTodoListItemName,
   setNewTodoListItem,
   actions,
-} from '../sidebar';
-jest.mock('../../../api/api');
+} from '../../sidebar';
+jest.mock('../../../../api/api');
 
 const todoAPIMock = todoAPI as jest.Mocked<typeof todoAPI>;
 
@@ -259,16 +259,16 @@ describe('sidebar thunks test', () => {
     ];
 
     todoAPIMock.renameTodoListItem.mockReturnValue(Promise.resolve(result[0]));
-    const thunk = changeTodoListItemName(result[0].id, result[0].name);
+    const thunk = changeTodoListItemName(result[0].id, 'newTitle');
     await thunk(dispatchMock, getStateMock, {});
     expect(dispatchMock).toBeCalledTimes(3);
     expect(dispatchMock).toHaveBeenNthCalledWith(
       1,
-      actions.changeTodoListItemName(result[0].id, result[0].name),
+      actions.changeTodoListItemName(result[0].id, 'newTitle'),
     );
     expect(dispatchMock).toHaveBeenNthCalledWith(
       2,
-      actions.changeActiveTodoListName(result[0].id, result[0].name),
+      actions.changeActiveTodoListName(result[0].id, 'newTitle'),
     );
     expect(dispatchMock).toHaveBeenNthCalledWith(3, actions.isLoadedSuccess());
   });

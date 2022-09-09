@@ -28,7 +28,7 @@ let initialState = {
     | '',
 };
 
-const appReducer = (state = initialState, action: ActionsTypes): initialStateType => {
+const sidebarReducer = (state = initialState, action: ActionsTypes): initialStateType => {
   switch (action.type) {
     case ISLOADED_SUCCESS: {
       return {
@@ -277,4 +277,4 @@ type ThunkType = BaseThunkType<ActionsTypes | FormAction>;
 
 /* for test commit */
 
-export default appReducer;
+export default sidebarReducer;
