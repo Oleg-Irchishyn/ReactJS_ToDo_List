@@ -91,7 +91,11 @@ const AllTasksItem: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
         onClick={() => {
           setActiveTodoList(listItem);
         }}>
-        <NavLink title={listItem.name} rel="nofollow" to={`/lists/${listItem.id}`}>
+        <NavLink
+          data-testid="active-task-link"
+          title={listItem.name}
+          rel="nofollow"
+          to={`/lists/${listItem.id}`}>
           <h2 style={titleStyle} className={cn(styles.activetask__title)}>
             <span>{listItem && listItem.name}</span>
             <i onClick={() => onChangeActiveListName(listItem.id, listItem.name)}>

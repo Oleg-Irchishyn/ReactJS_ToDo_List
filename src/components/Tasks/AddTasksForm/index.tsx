@@ -17,8 +17,8 @@ import { FormAction, InjectedFormProps, reduxForm } from 'redux-form';
 import { createInput } from '../../common/FormControls';
 import { maxLengthCreator, required } from '../../../redux/utils/validators';
 
-const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
-  ({ colors, selectedTodoListColor, setNewTodoListItem }) => {
+export const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
+  React.memo(({ colors, selectedTodoListColor, setNewTodoListItem }) => {
     const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
     const showAddTaskFormPopup = () => {
@@ -54,12 +54,16 @@ const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
     };
     return (
       <div className={cn(taskSstyles.tasks__items_form_wrapper)} ref={popupFormRef}>
-        <div className={cn(taskSstyles.tasks__items_add_btn)} onClick={showAddTaskFormPopup}>
+        <div
+          data-testid="form-popup-btn"
+          className={cn(taskSstyles.tasks__items_add_btn)}
+          onClick={showAddTaskFormPopup}>
           {!visibleForm ? <b>+</b> : <b>-</b>} <span>Add list</span>
         </div>
         {visibleForm && (
-          <div className={cn(styles.add_task_form)}>
+          <div data-testid="add-task-form-popup" className={cn(styles.add_task_form)}>
             <div
+              data-testid="popup-close-btn"
               className={cn(styles.add_task_form__close)}
               onClick={() => setFormVisibility(false)}></div>
             <ul className={cn(styles.add_task_form__colorbadges_wrapper)}>
@@ -74,12 +78,11 @@ const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps
         )}
       </div>
     );
-  },
-);
+  });
 
 const maxLength20 = maxLengthCreator(20);
 
-const AddNewTaskForm: React.FC<InjectedFormProps<AddNewTaskFormValuesType>> = (props) => {
+export const AddNewTaskForm: React.FC<InjectedFormProps<AddNewTaskFormValuesType>> = (props) => {
   const { handleSubmit } = props;
   return (
     <form className={cn(styles.add_task_form__content)} onSubmit={handleSubmit}>
@@ -87,7 +90,7 @@ const AddNewTaskForm: React.FC<InjectedFormProps<AddNewTaskFormValuesType>> = (p
         required,
         maxLength20,
       ])}
-      <button>Submit</button>
+      <button data-testid="tasksForm-submit-btn">Submit</button>
     </form>
   );
 };

@@ -11,25 +11,24 @@ import { SingleTask, AddTasksForm } from '../';
 import { SideBarTodoListsType } from '../../redux/types/types';
 import { actions } from '../../redux/reducers/sidebar';
 
-const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
+export const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({
     sidebarTodoList,
     setActiveTodoList,
     activeTodoList,
     handleToggleShrinkedSidebar,
     shrinkedSidebar,
-    history
+    history,
   }) => {
     React.useEffect(() => {
       const listId = history.location.pathname.substring(7);
-     if(sidebarTodoList) {
-       const list =  sidebarTodoList && sidebarTodoList.find(list => list.id === Number(listId))
-       if(list) {
-       setActiveTodoList(list)
-       }
-     }
-
-    },[history.location.pathname])
+      if (sidebarTodoList) {
+        const list = sidebarTodoList && sidebarTodoList.find((list) => list.id === Number(listId));
+        if (list) {
+          setActiveTodoList(list);
+        }
+      }
+    }, [history.location.pathname]);
     return (
       <div
         className={cn(styles.tasks, {
@@ -41,14 +40,19 @@ const Tasks: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = Rea
             [styles.active]: !activeTodoList,
           })}
           onClick={() => setActiveTodoList('')}>
-          <NavLink className={cn(styles.tasks__items_all)} to="/" title="All tasks" rel="nofollow">
+          <NavLink
+            data-testid="all-tasks-link"
+            className={cn(styles.tasks__items_all)}
+            to="/"
+            title="All tasks"
+            rel="nofollow">
             All Tasks
           </NavLink>
         </div>
         {sidebarTodoList &&
           sidebarTodoList.map((elem) => {
             //@ts-ignore
-            return <SingleTask key={elem.id} elem={elem} />;
+            return <SingleTask data-testid="single-task" key={elem.id} elem={elem} />;
           })}
         <AddTasksForm />
 

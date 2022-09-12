@@ -14,13 +14,14 @@ import { Scrollbars } from 'react-custom-scrollbars';
 const ActiveTaskList = React.lazy(() => import('../TasksItems/ActiveTaskItem/'));
 const AllTasksItem = React.lazy(() => import('../TasksItems/AllTasksItem/'));
 
-const SuspendedActiveTaskList = withSuspense(ActiveTaskList);
-const SuspendedAllTasksItem = withSuspense(AllTasksItem);
+export const SuspendedActiveTaskList = withSuspense(ActiveTaskList);
+export const SuspendedAllTasksItem = withSuspense(AllTasksItem);
 
 const TasksItems: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> = React.memo(
   ({ sidebarTodoList, shrinkedSidebar }) => {
     return (
       <div
+        data-testid="tasks-items-component"
         className={cn(styles.taskItems, {
           [styles.hidden]: shrinkedSidebar,
         })}>

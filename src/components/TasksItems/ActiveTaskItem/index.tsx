@@ -71,7 +71,7 @@ const ActiveTaskList: React.FC<MapStatePropsType & MapDispatchPropsType & ownPro
   };
 
   return (
-    <div className={cn(styles.activetask)}>
+    <div className={cn(styles.activetask)} data-testid="active-task">
       <h2 style={titleStyle} className={cn(styles.activetask__title)}>
         <span>{activeTodoList && activeTodoList.name}</span>
         <i onClick={() => onChangeActiveListName(activeTodoList.id, activeTodoList.name)}>

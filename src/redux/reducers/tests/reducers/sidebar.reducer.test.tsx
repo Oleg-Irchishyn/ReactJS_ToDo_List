@@ -42,7 +42,7 @@ describe('sidebar reducer', () => {
     expect(newState.sidebarTodoList.length).toBe(3);
   });
 
-  test(`setTodoListColors test`, () => {
+  test(`setTodoListColors action test`, () => {
     state = {
       sidebarTodoList: [] as Array<SideBarTodoListsType>,
       colors: [] as Array<ColorsType>,
@@ -76,7 +76,7 @@ describe('sidebar reducer', () => {
     expect(newState.colors.length).toBe(3);
   });
 
-  test(`addNewTodoList test`, () => {
+  test(`addNewTodoList action test`, () => {
     state = {
       sidebarTodoList: [
         {
@@ -115,7 +115,7 @@ describe('sidebar reducer', () => {
     expect(newState.sidebarTodoList[3].name).toBe('New Text');
   });
 
-  test(`deleteTodoListItem test`, () => {
+  test(`deleteTodoListItem action test`, () => {
     state = {
       sidebarTodoList: [
         {
@@ -148,7 +148,7 @@ describe('sidebar reducer', () => {
     expect(newState.sidebarTodoList[3]).toBeUndefined();
   });
 
-  test(`changeTodoListItemName test`, () => {
+  test(`changeTodoListItemName action test`, () => {
     state = {
       sidebarTodoList: [
         {
