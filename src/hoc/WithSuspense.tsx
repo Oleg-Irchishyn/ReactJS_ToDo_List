@@ -10,3 +10,5 @@ export function withSuspense<WCP>(WrappedComponent: React.ComponentType<WCP>) {
     );
   };
 }
+
+// just for update
