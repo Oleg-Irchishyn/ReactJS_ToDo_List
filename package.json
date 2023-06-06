@@ -1,6 +1,10 @@
 {
   "name": "reactjs-todo-lists-app",
   "version": "0.1.0",
+   "engines": {
+    "node": "14.17.0",
+    "npm": "6.14.13"
+  },
   "private": true,
   "homepage": "https://reactjs-todo-lists-app.herokuapp.com",
   "dependencies": {
