@@ -10,29 +10,13 @@ import { createInput } from '../common/FormControls';
 import { maxLengthCreator, required } from '../../redux/utils/validators';
 import { setNewTodoListTaskSuccess } from '../../redux/reducers/tasks';
 import { SideBarTodoListsType } from '../../redux/types/types';
-import { initializeApp } from '../../redux/reducers/app';
 
-var activeElem;
 const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & ownProps> =
   React.memo(
     ({
       setNewTodoListTaskSuccess,
-      initializeApp,
       activeListId,
     }) => {
-      const handleActiveElemClick = React.useCallback(() => {
-        activeElem = document.querySelectorAll('.Tasks_tasks__item_wrapper__3wSoV');
-        function triggerClick(activeElement: any) {
-          activeElement.click()
-        }
-        activeElem.forEach(function (elem: any, index) {
-          if (elem.classList.contains('Tasks_active__uBwpm')) {
-            elem.click();
-            setTimeout(() =>  triggerClick, 500);
-          }
-        });
-      }, [activeListId]);
-
       const [visibleForm, setFormVisibility] = React.useState<boolean>(false);
 
       const showAddTaskFormPopup = () => {
@@ -64,7 +48,7 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         dispatch: (T: FormAction) => void,
       ) => {
         const newTaskItem = {
-          id: Number(uuidv4()),
+          id: uuidv4(),
           listId: activeListId && activeListId?.id,
           text: values.text,
           completed: false,
@@ -73,8 +57,6 @@ const AddTodoListTaskForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
         const { id, listId, text, completed } = newTaskItem;
         setFormVisibility(false);
         setNewTodoListTaskSuccess(id, listId, text, completed);
-        initializeApp();
-        handleActiveElemClick();
       };
       return (
         <div ref={dropdownFormRef} className={cn(styles.form_wrapper)}>
@@ -144,7 +126,6 @@ type MapDispatchPropsType = {
     text: string | number,
     completed: boolean,
   ) => void;
-  initializeApp: () => void;
 };
 
 type ownProps = {
@@ -154,6 +135,5 @@ type ownProps = {
 export default compose<React.ComponentType>(
   connect<MapStatePropsType, MapDispatchPropsType, ownProps, AppStateType>(mapStateToProps, {
     setNewTodoListTaskSuccess,
-    initializeApp,
   }),
 )(AddTodoListTaskForm);

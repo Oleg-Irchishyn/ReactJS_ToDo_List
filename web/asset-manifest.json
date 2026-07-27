@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/ReactJS_ToDo_List/web/static/css/main.3f5164c4.chunk.css",
-    "main.js": "/ReactJS_ToDo_List/web/static/js/main.5661669d.chunk.js",
-    "main.js.map": "/ReactJS_ToDo_List/web/static/js/main.5661669d.chunk.js.map",
+    "main.js": "/ReactJS_ToDo_List/web/static/js/main.08edf765.chunk.js",
+    "main.js.map": "/ReactJS_ToDo_List/web/static/js/main.08edf765.chunk.js.map",
     "runtime-main.js": "/ReactJS_ToDo_List/web/static/js/runtime-main.660ae7e4.js",
     "runtime-main.js.map": "/ReactJS_ToDo_List/web/static/js/runtime-main.660ae7e4.js.map",
     "static/css/2.015d2961.chunk.css": "/ReactJS_ToDo_List/web/static/css/2.015d2961.chunk.css",
-    "static/js/2.be41f9bf.chunk.js": "/ReactJS_ToDo_List/web/static/js/2.be41f9bf.chunk.js",
-    "static/js/2.be41f9bf.chunk.js.map": "/ReactJS_ToDo_List/web/static/js/2.be41f9bf.chunk.js.map",
+    "static/js/2.2603e742.chunk.js": "/ReactJS_ToDo_List/web/static/js/2.2603e742.chunk.js",
+    "static/js/2.2603e742.chunk.js.map": "/ReactJS_ToDo_List/web/static/js/2.2603e742.chunk.js.map",
     "static/js/3.5fc92295.chunk.js": "/ReactJS_ToDo_List/web/static/js/3.5fc92295.chunk.js",
     "static/js/3.5fc92295.chunk.js.map": "/ReactJS_ToDo_List/web/static/js/3.5fc92295.chunk.js.map",
     "index.html": "/ReactJS_ToDo_List/web/index.html",
     "static/css/2.015d2961.chunk.css.map": "/ReactJS_ToDo_List/web/static/css/2.015d2961.chunk.css.map",
     "static/css/main.3f5164c4.chunk.css.map": "/ReactJS_ToDo_List/web/static/css/main.3f5164c4.chunk.css.map",
-    "static/js/2.be41f9bf.chunk.js.LICENSE.txt": "/ReactJS_ToDo_List/web/static/js/2.be41f9bf.chunk.js.LICENSE.txt",
+    "static/js/2.2603e742.chunk.js.LICENSE.txt": "/ReactJS_ToDo_List/web/static/js/2.2603e742.chunk.js.LICENSE.txt",
     "static/media/Tasks.module.scss": "/ReactJS_ToDo_List/web/static/media/all-tasks.5965cfc5.svg",
     "static/media/edit.svg": "/ReactJS_ToDo_List/web/static/media/edit.e0c9cc7e.svg",
     "static/media/font-awesome.min.css": "/ReactJS_ToDo_List/web/static/media/fontawesome-webfont.f691f37e.woff",
@@ -23,8 +23,8 @@
   "entrypoints": [
     "static/js/runtime-main.660ae7e4.js",
     "static/css/2.015d2961.chunk.css",
-    "static/js/2.be41f9bf.chunk.js",
+    "static/js/2.2603e742.chunk.js",
     "static/css/main.3f5164c4.chunk.css",
-    "static/js/main.5661669d.chunk.js"
+    "static/js/main.08edf765.chunk.js"
   ]
 }

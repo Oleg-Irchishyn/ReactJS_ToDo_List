@@ -51,7 +51,7 @@ const sidebarReducer = (state = initialState, action: ActionsTypes): initialStat
     case ADD_NEW_TODO_LIST_ITEM: {
       return {
         ...state,
-        sidebarTodoList: [...state.sidebarTodoList, action.payload],
+        sidebarTodoList: [...state.sidebarTodoList, { tasks: [], ...action.payload }],
       };
     }
     case SET_SELECTED_TODO_LIST_COLOR: {
@@ -88,8 +88,8 @@ const sidebarReducer = (state = initialState, action: ActionsTypes): initialStat
       };
     }
     case ADD_NEW_ACTIVE_TODO_LIST_TASK: {
-      if (state.activeTodoList && state.activeTodoList.tasks) {
-        const newTodoTaskList = [...state.activeTodoList.tasks, action.payload];
+      if (state.activeTodoList) {
+        const newTodoTaskList = [...(state.activeTodoList.tasks || []), action.payload];
         return {
           ...state,
           activeTodoList: {
