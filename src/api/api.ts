@@ -2,8 +2,8 @@ import axios from 'axios';
 import { SideBarTodoListsType, TasksType } from '../redux/types/types';
 
 const instance = axios.create({
-  withCredentials: true,
-  baseURL: '/',
+  withCredentials: false,
+  baseURL: 'https://my-json-server.typicode.com/Oleg-Irchishyn/projects_db/',
 });
 
 export const todoAPI = {
