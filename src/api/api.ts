@@ -3,7 +3,7 @@ import { ColorsType, SideBarTodoListsType, TasksType } from '../redux/types/type
 
 const instance = axios.create({
   withCredentials: false,
-  baseURL: 'https://my-json-server.typicode.com/Oleg-Irchishyn/projects_db/',
+  baseURL: 'https://projects-db-f2se.onrender.com/',
 });
 
 // my-json-server caps db.json at 5 top-level resources, and this repo's quota is
