@@ -1,21 +1,33 @@
 import axios from 'axios';
-import { SideBarTodoListsType, TasksType } from '../redux/types/types';
+import { ColorsType, SideBarTodoListsType, TasksType } from '../redux/types/types';
 
 const instance = axios.create({
   withCredentials: false,
   baseURL: 'https://my-json-server.typicode.com/Oleg-Irchishyn/projects_db/',
 });
 
+// my-json-server caps db.json at 5 top-level resources, and this repo's quota is
+// already spent on quizQuestions/quizForms/quizResults/lists/tasks. Colors are a
+// static palette (not user data), so they're kept here instead of a 6th resource.
+const TODO_LIST_COLORS: Array<ColorsType> = [
+  { id: 1, hex: '#C9D1D3', name: 'grey' },
+  { id: 2, hex: '#42B883', name: 'green' },
+  { id: 3, hex: '#64C4ED', name: 'blue' },
+  { id: 4, hex: '#FFBBCC', name: 'pink' },
+  { id: 5, hex: '#B6E6BD', name: 'lime' },
+  { id: 6, hex: '#C355F5', name: 'purple' },
+  { id: 7, hex: '#110133', name: 'black' },
+  { id: 8, hex: '#FF6464', name: 'red' },
+];
+
 export const todoAPI = {
   getSidebarTodoList: () => {
-    return instance.get(`lists?_expand=color&_embed=tasks`).then((response) => {
+    return instance.get(`lists?_embed=tasks`).then((response) => {
       return response.data;
     });
   },
   getTodoListColors: () => {
-    return instance.get(`colors`).then((response) => {
-      return response.data;
-    });
+    return Promise.resolve(TODO_LIST_COLORS);
   },
   getTodoListTasks: () => {
     return instance.get(`tasks`).then((response) => {
