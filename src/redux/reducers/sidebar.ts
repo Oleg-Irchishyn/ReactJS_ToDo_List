@@ -51,7 +51,6 @@ const sidebarReducer = (state = initialState, action: ActionsTypes): initialStat
     case ADD_NEW_TODO_LIST_ITEM: {
       return {
         ...state,
-        isLoaded: false,
         sidebarTodoList: [...state.sidebarTodoList, action.payload],
       };
     }

@@ -43,7 +43,7 @@ export const AddTasksForm: React.FC<MapStatePropsType & MapDispatchPropsType & o
 
     const onSubmitForm = (values: AddNewTaskFormValuesType, dispatch: (T: FormAction) => void) => {
       const newTaskItem = {
-        id: Number(uuidv4()),
+        id: uuidv4(),
         name: values.name,
         colorId: selectedTodoListColor,
       };
