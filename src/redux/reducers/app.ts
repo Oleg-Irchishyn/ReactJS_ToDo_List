@@ -32,7 +32,7 @@ export const initializeApp = () => (dispatch: ThunkDispatchType) => {
     dispatch(getAllTodoListTasks()),
   ];
 
-  Promise.all([promises]).then(() => {
+  Promise.all(promises).then(() => {
     dispatch(actions.initializedSuccess());
   });
 };
